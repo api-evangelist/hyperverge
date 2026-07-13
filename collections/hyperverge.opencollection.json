@@ -1,0 +1,263 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "HyperVerge Identity Verification API",
+    "version": "1.0",
+    "description": "Documented public REST surface for HyperVerge (India region hosts). Auth is an appId/appKey header pair issued by HyperVerge (lowercase appid/appkey on the Face Match host)."
+  },
+  "items": [
+    {
+      "info": { "name": "KYC OCR", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Read KYC (auto-detect document)", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-docs.hyperverge.co/v2.0/readKYC",
+            "headers": [
+              { "name": "appId", "value": "{{appId}}" },
+              { "name": "appKey", "value": "{{appKey}}" }
+            ],
+            "body": { "type": "text", "data": "multipart/form-data with one of: image (file), pdf (file), or url" }
+          },
+          "docs": "Auto-detects the supported Indian document type and extracts KYC fields."
+        },
+        {
+          "info": { "name": "Read PAN", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-docs.hyperverge.co/v2.0/readPAN",
+            "headers": [
+              { "name": "appId", "value": "{{appId}}" },
+              { "name": "appKey", "value": "{{appKey}}" }
+            ],
+            "body": { "type": "text", "data": "multipart/form-data: image | pdf | url" }
+          },
+          "docs": "Extracts fields from an Indian PAN card."
+        },
+        {
+          "info": { "name": "Read Aadhaar", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-docs.hyperverge.co/v2.0/readAadhaar",
+            "headers": [
+              { "name": "appId", "value": "{{appId}}" },
+              { "name": "appKey", "value": "{{appKey}}" }
+            ],
+            "body": { "type": "text", "data": "multipart/form-data: image | pdf | url" }
+          },
+          "docs": "Extracts fields from an Aadhaar card."
+        },
+        {
+          "info": { "name": "Read Passport", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-docs.hyperverge.co/v2.0/readPassport",
+            "headers": [
+              { "name": "appId", "value": "{{appId}}" },
+              { "name": "appKey", "value": "{{appKey}}" }
+            ],
+            "body": { "type": "text", "data": "multipart/form-data: image | pdf | url" }
+          },
+          "docs": "Extracts fields from an Indian passport."
+        },
+        {
+          "info": { "name": "Read Voter ID", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-docs.hyperverge.co/v2.0/readVoterID",
+            "headers": [
+              { "name": "appId", "value": "{{appId}}" },
+              { "name": "appKey", "value": "{{appKey}}" }
+            ],
+            "body": { "type": "text", "data": "multipart/form-data: image | pdf | url" }
+          },
+          "docs": "Extracts fields from a Voter ID (EPIC) card."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Database Verification", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Health check", "type": "http" },
+          "http": { "method": "GET", "url": "https://ind-verify.hyperverge.co/api" },
+          "docs": "Returns plain-text 'Aok' to confirm connectivity."
+        },
+        {
+          "info": { "name": "Verify PAN", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-verify.hyperverge.co/api/verifyPAN",
+            "headers": [
+              { "name": "appId", "value": "{{appId}}" },
+              { "name": "appKey", "value": "{{appKey}}" },
+              { "name": "content-type", "value": "application/json" }
+            ],
+            "body": { "type": "json", "data": "{\"pan\":\"ABCDE1234F\",\"name\":\"Jane Doe\",\"dob\":\"01/01/1990\"}" }
+          },
+          "docs": "Verifies a PAN against name and date of birth."
+        },
+        {
+          "info": { "name": "Get name from PAN", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-verify.hyperverge.co/api/getNameFromPAN",
+            "headers": [
+              { "name": "appId", "value": "{{appId}}" },
+              { "name": "appKey", "value": "{{appKey}}" },
+              { "name": "content-type", "value": "application/json" }
+            ],
+            "body": { "type": "json", "data": "{\"pan\":\"ABCDE1234F\"}" }
+          },
+          "docs": "Returns the registered holder name for a PAN."
+        },
+        {
+          "info": { "name": "Check Driving License", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-verify.hyperverge.co/api/checkDL",
+            "headers": [
+              { "name": "appId", "value": "{{appId}}" },
+              { "name": "appKey", "value": "{{appKey}}" },
+              { "name": "content-type", "value": "application/json" }
+            ],
+            "body": { "type": "json", "data": "{\"dlNumber\":\"KA0120200001234\",\"dob\":\"01-01-1990\"}" }
+          },
+          "docs": "Verifies and extracts driving license data."
+        },
+        {
+          "info": { "name": "Check Voter ID", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-verify.hyperverge.co/api/checkVoterId",
+            "headers": [
+              { "name": "appId", "value": "{{appId}}" },
+              { "name": "appKey", "value": "{{appKey}}" },
+              { "name": "content-type", "value": "application/json" }
+            ],
+            "body": { "type": "json", "data": "{\"epicNumber\":\"ABC1234567\"}" }
+          },
+          "docs": "Extracts and verifies Voter ID information by EPIC number."
+        },
+        {
+          "info": { "name": "Check Bank Account", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-verify.hyperverge.co/api/checkBankAccount",
+            "headers": [
+              { "name": "appId", "value": "{{appId}}" },
+              { "name": "appKey", "value": "{{appKey}}" },
+              { "name": "content-type", "value": "application/json" }
+            ],
+            "body": { "type": "json", "data": "{\"ifsc\":\"HDFC0000001\",\"accountNumber\":\"00000000000\"}" }
+          },
+          "docs": "Verifies bank account details by IFSC and account number."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Input Validation", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Validate PAN input", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-verify.hyperverge.co/api/validatePANInput",
+            "headers": [
+              { "name": "appId", "value": "{{appId}}" },
+              { "name": "appKey", "value": "{{appKey}}" },
+              { "name": "content-type", "value": "application/json" }
+            ],
+            "body": { "type": "json", "data": "{\"userInput\":{\"panNumber\":\"ABCDE1234F\",\"name\":\"Jane Doe\",\"dob\":\"01/01/1990\"},\"ocrResult\":{}}" }
+          },
+          "docs": "Cross-validates user-entered PAN details against OCR output."
+        },
+        {
+          "info": { "name": "Validate Aadhaar input", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-verify.hyperverge.co/api/validateAadhaarInput",
+            "headers": [
+              { "name": "appId", "value": "{{appId}}" },
+              { "name": "appKey", "value": "{{appKey}}" },
+              { "name": "content-type", "value": "application/json" }
+            ],
+            "body": { "type": "json", "data": "{\"userInput\":{\"aadhaar\":\"000000000000\",\"name\":\"Jane Doe\",\"dob\":\"01/01/1990\"},\"ocrResultFront\":{},\"ocrResultBack\":{}}" }
+          },
+          "docs": "Cross-validates Aadhaar details (or QR data) against front/back OCR."
+        },
+        {
+          "info": { "name": "Validate Passport input", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-verify.hyperverge.co/api/validatePassportInput",
+            "headers": [
+              { "name": "appId", "value": "{{appId}}" },
+              { "name": "appKey", "value": "{{appKey}}" },
+              { "name": "content-type", "value": "application/json" }
+            ],
+            "body": { "type": "json", "data": "{\"userInput\":{\"passportNumber\":\"A1234567\",\"name\":\"Jane Doe\",\"dob\":\"01/01/1990\"},\"ocrResultFront\":{},\"ocrResultBack\":{}}" }
+          },
+          "docs": "Cross-validates passport details against front/back OCR."
+        },
+        {
+          "info": { "name": "Validate Voter ID input", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-verify.hyperverge.co/api/validateVoterIdInput",
+            "headers": [
+              { "name": "appId", "value": "{{appId}}" },
+              { "name": "appKey", "value": "{{appKey}}" },
+              { "name": "content-type", "value": "application/json" }
+            ],
+            "body": { "type": "json", "data": "{\"userInput\":{\"voterId\":\"ABC1234567\",\"name\":\"Jane Doe\",\"dob\":\"01/01/1990\"},\"ocrResultFront\":{},\"ocrResultBack\":{}}" }
+          },
+          "docs": "Cross-validates Voter ID details against front/back OCR."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Matching", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Match fields", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-verify.hyperverge.co/api/matchFields",
+            "headers": [
+              { "name": "appId", "value": "{{appId}}" },
+              { "name": "appKey", "value": "{{appKey}}" },
+              { "name": "content-type", "value": "application/json" }
+            ],
+            "body": { "type": "json", "data": "{\"name\":{\"value1\":\"Jane Doe\",\"value2\":\"Jane A Doe\"},\"dob\":{\"value1\":\"01/01/1990\",\"value2\":\"01/01/1990\"}}" }
+          },
+          "docs": "Compares field pairs (fuzzy for name/address, direct for others); returns per-field and overall match flags."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Face Match", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Face Match health check", "type": "http" },
+          "http": { "method": "GET", "url": "https://ind-faceid.hyperverge.co/v1/photo/verifyPair" },
+          "docs": "Returns plain-text 'Hello!' to confirm connectivity."
+        },
+        {
+          "info": { "name": "Verify face pair", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-faceid.hyperverge.co/v1/photo/verifyPair",
+            "headers": [
+              { "name": "appid", "value": "{{appId}}" },
+              { "name": "appkey", "value": "{{appKey}}" }
+            ],
+            "body": { "type": "text", "data": "multipart/form-data: selfie (file) + id (file), or selfie (file) + selfie2 (file)" }
+          },
+          "docs": "Determines whether two face images belong to the same person. Note: lowercase appid/appkey headers on this host."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: HyperVerge
+providerId: hyperverge
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Identity Verification
+- KYC
+- India
+- Rate Limiting
+- Quotas
+description: >-
+  HyperVerge does not publish fixed numeric per-second or per-minute rate limits
+  in its public REST-API documentation. Throughput and monthly verification
+  volume are governed by the commercial plan (Start / Grow / Enterprise) and the
+  appId/appKey credentials issued to the account, rather than by a documented
+  public request cap. Invalid or missing credentials return HTTP 401. Contact
+  HyperVerge for the concurrency and volume limits provisioned for a given
+  account and region host.
+notes: >-
+  No numeric per-account or per-endpoint request-rate limits were documented at
+  review time. Reconcile actual concurrency, burst, and monthly verification
+  allowances with HyperVerge during onboarding.
+sources:
+- https://documentation.hyperverge.co/
+- https://github.com/hyperverge/kyc-india-rest-api
+- https://hyperverge.co/pricing/
+responseCodes:
+  unauthorized: 401
+limits:
+- name: Verification Requests
+  scope: account
+  metric: requests
+  limit: not published
+  notes: No fixed numeric request-rate limit is documented for the REST APIs; governed by the account's commercial plan.
+- name: Monthly Verification Volume
+  scope: account
+  metric: verifications
+  limit: per plan
+  notes: Volume allowance is set by the Start / Grow / Enterprise agreement and issued credentials.
+policies:
+- name: Credential Enforcement
+  description: Every request must include a valid appId/appKey pair; invalid or missing credentials return HTTP 401.
+- name: Backoff Strategy
+  description: Clients should implement retry with exponential backoff on transient 5xx responses and respect any account-level concurrency provisioned by HyperVerge.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

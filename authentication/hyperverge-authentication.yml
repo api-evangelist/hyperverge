@@ -1,0 +1,36 @@
+generated: '2026-07-12'
+method: derived
+source: openapi/hyperverge-openapi.yml
+summary:
+  types:
+  - apiKey
+schemes:
+- name: appIdKey
+  type: apiKey
+  in: header
+  scheme: custom-header-pair
+  description: >-
+    HyperVerge issues an `appId` and `appKey` pair after enterprise onboarding.
+    Both are sent as request headers on every call: `appId` and `appKey` on the
+    KYC OCR (ind-docs.hyperverge.co) and Verification (ind-verify.hyperverge.co)
+    hosts, and lowercase `appid` and `appkey` on the Face Match
+    (ind-faceid.hyperverge.co) host. Credentials are not self-serve - they are
+    provided by the HyperVerge team. Invalid or missing credentials return HTTP
+    401. HyperVerge warns against exposing appId/appKey in browser applications;
+    call the APIs server-side.
+  headers:
+  - appId
+  - appKey
+  - appid
+  - appkey
+  optionalHeaders:
+  - name: referenceId
+    description: Client-supplied identifier echoed back in responses for request grouping.
+  - name: uuid
+    description: Enables an X-Response-Signature checksum header for response integrity validation.
+  - name: transactionid
+    description: Optional transaction identifier on the Matching API.
+  sources:
+  - openapi/hyperverge-openapi.yml
+  - https://github.com/hyperverge/kyc-india-rest-api
+  - https://github.com/hyperverge/face-match-india-rest-api

@@ -1,0 +1,102 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: HyperVerge
+providerId: hyperverge
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Identity Verification
+- KYC
+- Onboarding
+- India
+- Plans
+description: >-
+  HyperVerge sells identity verification on a quote-based, volume-tiered model.
+  It publishes named tiers (Start, Grow, and Enterprise) but does not list a
+  public per-verification price - pricing is negotiated to your verification
+  volume and the set of modules used (document OCR/KYC, face match, liveness,
+  database verification). Unit price per verification decreases as volume
+  increases, and advanced fraud-prevention modules can carry additional cost.
+  Access requires enterprise onboarding, after which the HyperVerge team issues
+  appId/appKey credentials. Exact per-unit rates are not reconciled here.
+notes: >-
+  Tier names are from HyperVerge's public pricing page; the actual monetary
+  amounts are quote-only and were not published at review time. Verify current
+  tiers, included modules, and per-verification rates directly with HyperVerge
+  sales during reconciliation.
+sources:
+- https://hyperverge.co/pricing/
+- https://hyperverge.co/
+- https://documentation.hyperverge.co/
+plans:
+- id: hyperverge-start
+  name: Start
+  type: subscription
+  description: >-
+    Entry tier for lower-volume onboarding, priced by verification volume with a
+    quote. Includes core identity verification modules.
+  entries:
+  - label: Verifications
+    name: start_verifications
+    type: usage
+    metric: verifications
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: quote-based (per verification; volume-tiered)
+    userMultiplied: false
+  elements:
+  - name: Document OCR / KYC Extraction
+  - name: Face Match
+  - name: Passive Liveness
+- id: hyperverge-grow
+  name: Grow
+  type: subscription
+  description: >-
+    Mid tier for growing volumes with lower per-verification unit pricing and a
+    broader module set, priced by quote.
+  entries:
+  - label: Verifications
+    name: grow_verifications
+    type: usage
+    metric: verifications
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: quote-based (per verification; lower unit rate at higher volume)
+    userMultiplied: false
+  elements:
+  - name: Document OCR / KYC Extraction
+  - name: Face Match and Liveness
+  - name: Database Verification
+  - name: Onboarding Workflow
+- id: hyperverge-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Custom tier for high-volume and regulated deployments - negotiated
+    per-verification pricing, additional fraud-prevention modules, region
+    hosting, SLAs, security review, and support. Contact HyperVerge sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Custom Volume Pricing
+  - name: Advanced Fraud Prevention
+  - name: Region Hosting (India / APAC / others)
+  - name: SLAs and Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

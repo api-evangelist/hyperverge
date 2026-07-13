@@ -1,0 +1,128 @@
+aid: hyperverge
+name: HyperVerge
+review:
+  question: Does HyperVerge expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-12'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Every documented HyperVerge public API
+    surface is request/response REST over HTTPS - KYC OCR (ind-docs), central
+    database verification / input validation / matching (ind-verify), and face
+    match (ind-faceid). There is no server-push transport (WebSocket or SSE) on
+    HyperVerge's own REST APIs to model. Real-time capture (liveness, active
+    face capture) is handled inside HyperVerge's client SDKs and hosted
+    onboarding Workflow, not as a public streaming API.
+findings:
+  summary: |
+    HyperVerge does not publish a documented public WebSocket API. HyperVerge's
+    documented REST surface (from its official GitHub REST-API repositories) is
+    pure request/response HTTPS across three India region hosts: KYC document
+    OCR at https://ind-docs.hyperverge.co/v2.0, central database verification /
+    input validation / field matching at https://ind-verify.hyperverge.co, and
+    face match at https://ind-faceid.hyperverge.co. All requests authenticate
+    with an appId + appKey header pair issued by HyperVerge. No realtime,
+    bidirectional, or streaming WebSocket (ws:// or wss://) endpoint is
+    documented on any HyperVerge API as of the review date.
+  accessModel: |
+    HyperVerge is an enterprise/onboarding-gated platform. appId and appKey
+    credentials are issued by the HyperVerge team after commercial onboarding;
+    there is no public self-serve signup that mints keys, and per-request
+    pricing is quote-based (Start / Grow / Enterprise tiers). Region hosts exist
+    per geography (India ind-*, and e.g. apac.faceid.hyperverge.co for Face
+    Match in APAC).
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://ind-verify.hyperverge.co
+      documented: true
+      note: Central database verification, input validation, and field matching. JSON bodies, appId/appKey headers.
+    - protocol: REST
+      scheme: https
+      baseURL: https://ind-docs.hyperverge.co/v2.0
+      documented: true
+      note: KYC document OCR / extraction. multipart/form-data, appId/appKey headers.
+    - protocol: REST
+      scheme: https
+      baseURL: https://ind-faceid.hyperverge.co
+      documented: true
+      note: Face Match. multipart/form-data, lowercase appid/appkey headers.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in any HyperVerge REST-API repository or docs portal as of the review date.
+  endpointsConfirmedRest:
+    - POST   https://ind-docs.hyperverge.co/v2.0/readKYC
+    - POST   https://ind-docs.hyperverge.co/v2.0/readPAN
+    - POST   https://ind-docs.hyperverge.co/v2.0/readAadhaar
+    - POST   https://ind-docs.hyperverge.co/v2.0/readPassport
+    - POST   https://ind-docs.hyperverge.co/v2.0/readVoterID
+    - GET    https://ind-verify.hyperverge.co/api
+    - POST   https://ind-verify.hyperverge.co/api/verifyPAN
+    - POST   https://ind-verify.hyperverge.co/api/getNameFromPAN
+    - POST   https://ind-verify.hyperverge.co/api/checkDL
+    - POST   https://ind-verify.hyperverge.co/api/checkVoterId
+    - POST   https://ind-verify.hyperverge.co/api/checkBankAccount
+    - POST   https://ind-verify.hyperverge.co/api/validatePANInput
+    - POST   https://ind-verify.hyperverge.co/api/validateAadhaarInput
+    - POST   https://ind-verify.hyperverge.co/api/validatePassportInput
+    - POST   https://ind-verify.hyperverge.co/api/validateVoterIdInput
+    - POST   https://ind-verify.hyperverge.co/api/matchFields
+    - GET    https://ind-faceid.hyperverge.co/v1/photo/verifyPair
+    - POST   https://ind-faceid.hyperverge.co/v1/photo/verifyPair
+  endpointsModeled:
+    - note: >-
+        Liveness / presentation-attack detection is a core HyperVerge product but
+        is delivered through the mobile SDKs and hosted onboarding Workflow. No
+        standalone documented public REST endpoint for liveness was confirmed in
+        HyperVerge's published REST-API repositories at review time, so none is
+        asserted in the OpenAPI. It is represented in apis.yml as a documentation
+        link only.
+    - note: >-
+        Request/response JSON and multipart schemas in the OpenAPI are modeled
+        representatively (status / statusCode / result envelope) rather than
+        copied field-for-field, and are flagged with x-modeled-note. Paths,
+        methods, hosts, and appId/appKey auth are confirmed.
+  schemaModeledStatus: |
+    Confirmed from HyperVerge's public REST-API repos: all endpoint paths, HTTP
+    methods, the three region hosts, appId/appKey header auth, multipart vs JSON
+    content types, and key request parameters (e.g. pan/name/dob on verifyPAN,
+    dlNumber/dob on checkDL, epicNumber on checkVoterId, ifsc/accountNumber on
+    checkBankAccount, selfie/id/selfie2 on verifyPair). Modeled/approximate:
+    full response bodies and nested validation/OCR field structures.
+sources:
+  - url: https://documentation.hyperverge.co/
+    type: Documentation
+    note: HyperVerge developer docs portal.
+  - url: https://github.com/hyperverge/kyc-india-rest-api
+    type: APIReference
+    note: KYC OCR host ind-docs.hyperverge.co/v2.0; readKYC/readPAN/readAadhaar/readPassport/readVoterID; appId/appKey.
+  - url: https://github.com/hyperverge/db-verification-india-rest-api
+    type: APIReference
+    note: DB verification host ind-verify.hyperverge.co; verifyPAN/getNameFromPAN/checkDL/checkVoterId/checkBankAccount.
+  - url: https://github.com/hyperverge/validation-india-rest-api
+    type: APIReference
+    note: Input validation host ind-verify.hyperverge.co; validate*Input endpoints.
+  - url: https://github.com/hyperverge/matching-india-rest-api
+    type: APIReference
+    note: Matching host ind-verify.hyperverge.co; matchFields (fuzzy name/address, direct for others).
+  - url: https://github.com/hyperverge/face-match-india-rest-api
+    type: APIReference
+    note: Face Match host ind-faceid.hyperverge.co; GET/POST /v1/photo/verifyPair; lowercase appid/appkey.
+  - url: https://hyperverge.co/pricing/
+    type: Pricing
+    note: Quote-based Start / Grow / Enterprise tiers; no public per-verification rate.
+  - url: https://hyperverge.co/in/integrations-marketplace/facial-recognition-api/
+    type: Documentation
+    note: Facial recognition + passive liveness; delivered via SDK/Workflow.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. HyperVerge's own public API is
+    request/response REST across three region hosts, authenticated with
+    appId/appKey. No AsyncAPI document was created because there is no
+    server-push (WebSocket or SSE) transport on HyperVerge's REST APIs to model;
+    real-time liveness capture happens inside client SDKs and the hosted
+    Workflow rather than over a public streaming API.

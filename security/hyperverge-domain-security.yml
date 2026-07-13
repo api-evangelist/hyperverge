@@ -1,0 +1,55 @@
+generated: '2026-07-12'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + REST API hosts
+hosts:
+- host: hyperverge.co
+  https: true
+  tls_version: TLSv1.3
+  cert_issuer: Let's Encrypt
+  cert_expires: Aug 31 03:10:52 2026 GMT
+  server: LiteSpeed
+  hsts: true
+  hsts_max_age: 31536000
+  hsts_include_subdomains: true
+  hsts_preload: true
+- host: documentation.hyperverge.co
+  https: true
+  tls_version: TLSv1.3
+  cert_issuer: Amazon
+  cert_expires: Oct 12 23:59:59 2026 GMT
+  server: AmazonS3
+  hsts: false
+- host: ind-docs.hyperverge.co
+  https: true
+  tls_version: TLSv1.2
+  cert_issuer: GoDaddy
+  cert_expires: Jul 15 02:21:43 2026 GMT
+  server: awselb/2.0
+  hsts: false
+  note: Root path returns HTTP 502 (endpoints require appId/appKey and a valid request body).
+- host: ind-verify.hyperverge.co
+  https: true
+  tls_version: TLSv1.2
+  cert_issuer: GoDaddy
+  cert_expires: Jan  3 03:46:05 2027 GMT
+  server: awselb/2.0
+  hsts: false
+  note: Root path returns HTTP 502; GET /api returns "Aok".
+- host: ind-faceid.hyperverge.co
+  https: true
+  tls_version: TLSv1.2
+  cert_issuer: GoDaddy
+  cert_expires: Jul 15 02:21:43 2026 GMT
+  server: nginx
+  hsts: true
+  hsts_max_age: 63072000
+  hsts_include_subdomains: true
+  hsts_preload: true
+domains:
+- domain: hyperverge.co
+  dnssec: false
+  caa: []
+  spf: true
+  spf_policy: '-all (hard fail)'
+  dmarc: true
+  dmarc_policy: reject

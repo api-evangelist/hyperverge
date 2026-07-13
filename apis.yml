@@ -1,0 +1,193 @@
+aid: hyperverge
+url: https://raw.githubusercontent.com/api-evangelist/hyperverge/refs/heads/main/apis.yml
+name: HyperVerge
+kind: company
+description: HyperVerge is an AI-based identity verification and customer onboarding
+  platform (India-HQ, global) providing document OCR and KYC extraction, face match,
+  passive liveness, government/central database verification, and field matching.
+  Its REST APIs extract and verify Indian identity documents (PAN, Aadhaar, Passport,
+  Voter ID, Driving License), match a selfie against an ID photo, and validate user
+  input against central databases for onboarding, AML, and fraud prevention. APIs are
+  region-hosted (India `ind-*`, plus APAC/other regions) and authenticated with an
+  appId and appKey issued by HyperVerge; enterprise onboarding is required to obtain
+  credentials.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Identity Verification
+- KYC
+- Face Authentication
+- Liveness
+- Document Verification
+- India
+- AML
+- Onboarding
+- Fraud Prevention
+- AI
+created: '2026-07-12'
+modified: '2026-07-12'
+specificationVersion: '0.19'
+apis:
+- aid: hyperverge:hyperverge-kyc-ocr-api
+  name: HyperVerge KYC OCR API
+  tags:
+  - KYC
+  - OCR
+  - Document Verification
+  - India
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://documentation.hyperverge.co/
+  baseURL: https://ind-docs.hyperverge.co/v2.0
+  properties:
+  - url: https://github.com/hyperverge/kyc-india-rest-api
+    type: Documentation
+  - url: https://github.com/hyperverge/kyc-india-rest-api/blob/master/README.md
+    type: APIReference
+  - url: openapi/hyperverge-openapi.yml
+    type: OpenAPI
+  - url: collections/hyperverge.postman_collection.json
+    type: PostmanCollection
+  - url: collections/hyperverge.opencollection.json
+    type: OpenCollection
+  description: Image/PDF OCR and KYC extraction for Indian identity documents. `readKYC`
+    auto-detects the document type; dedicated endpoints extract PAN, Aadhaar, Passport,
+    and Voter ID fields. Supports quality checks, face presence checks, and cropped
+    image output. Multipart form-data with appId/appKey headers.
+- aid: hyperverge:hyperverge-database-verification-api
+  name: HyperVerge Database Verification API
+  tags:
+  - Database Verification
+  - PAN
+  - Driving License
+  - Voter ID
+  - AML
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://documentation.hyperverge.co/
+  baseURL: https://ind-verify.hyperverge.co
+  properties:
+  - url: https://github.com/hyperverge/db-verification-india-rest-api
+    type: Documentation
+  - url: https://github.com/hyperverge/db-verification-india-rest-api/blob/master/README.md
+    type: APIReference
+  - url: openapi/hyperverge-openapi.yml
+    type: OpenAPI
+  - url: collections/hyperverge.postman_collection.json
+    type: PostmanCollection
+  - url: collections/hyperverge.opencollection.json
+    type: OpenCollection
+  description: Central-database (government source) verification for Indian documents -
+    verify a PAN with name and date of birth, fetch the registered name from a PAN,
+    validate a Driving License, check a Voter ID (EPIC), and verify bank account
+    details via IFSC and account number. JSON with appId/appKey headers.
+- aid: hyperverge:hyperverge-input-validation-api
+  name: HyperVerge Input Validation API
+  tags:
+  - Validation
+  - KYC
+  - Onboarding
+  - India
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://documentation.hyperverge.co/
+  baseURL: https://ind-verify.hyperverge.co
+  properties:
+  - url: https://github.com/hyperverge/validation-india-rest-api
+    type: Documentation
+  - url: https://github.com/hyperverge/validation-india-rest-api/blob/master/README.md
+    type: APIReference
+  - url: openapi/hyperverge-openapi.yml
+    type: OpenAPI
+  - url: collections/hyperverge.postman_collection.json
+    type: PostmanCollection
+  - url: collections/hyperverge.opencollection.json
+    type: OpenCollection
+  description: Cross-validates user-entered identity details against OCR (or QR) output
+    for PAN, Aadhaar, Passport, and Voter ID during onboarding, returning per-field
+    match results. JSON with appId/appKey headers.
+- aid: hyperverge:hyperverge-matching-api
+  name: HyperVerge Matching API
+  tags:
+  - Matching
+  - Fuzzy Match
+  - Onboarding
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://documentation.hyperverge.co/
+  baseURL: https://ind-verify.hyperverge.co
+  properties:
+  - url: https://github.com/hyperverge/matching-india-rest-api
+    type: Documentation
+  - url: https://github.com/hyperverge/matching-india-rest-api/blob/master/README.md
+    type: APIReference
+  - url: openapi/hyperverge-openapi.yml
+    type: OpenAPI
+  - url: collections/hyperverge.postman_collection.json
+    type: PostmanCollection
+  - url: collections/hyperverge.opencollection.json
+    type: OpenCollection
+  description: Compares two values across supported identity fields via `matchFields` -
+    fuzzy matching for name and address, direct matching for fields such as DOB, PAN,
+    Aadhaar, Passport, Voter ID, phone, and gender - returning per-field and overall
+    match flags. JSON with appId/appKey headers.
+- aid: hyperverge:hyperverge-face-match-api
+  name: HyperVerge Face Match API
+  tags:
+  - Face Authentication
+  - Face Match
+  - Biometrics
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://documentation.hyperverge.co/
+  baseURL: https://ind-faceid.hyperverge.co
+  properties:
+  - url: https://github.com/hyperverge/face-match-india-rest-api
+    type: Documentation
+  - url: https://github.com/hyperverge/face-match-india-rest-api/blob/master/README.md
+    type: APIReference
+  - url: openapi/hyperverge-openapi.yml
+    type: OpenAPI
+  - url: collections/hyperverge.postman_collection.json
+    type: PostmanCollection
+  - url: collections/hyperverge.opencollection.json
+    type: OpenCollection
+  description: Determines whether two face images belong to the same person via
+    `POST /v1/photo/verifyPair` - selfie-to-ID or selfie-to-selfie - returning a
+    match score. Multipart form-data with appId/appKey headers. APAC region is served
+    at `apac.faceid.hyperverge.co`.
+- aid: hyperverge:hyperverge-liveness-api
+  name: HyperVerge Liveness Detection
+  tags:
+  - Liveness
+  - Face Authentication
+  - Fraud Prevention
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://hyperverge.co/in/integrations-marketplace/facial-recognition-api/
+  baseURL: https://ind-faceid.hyperverge.co
+  properties:
+  - url: https://hyperverge.co/in/integrations-marketplace/facial-recognition-api/
+    type: Documentation
+  description: Passive liveness / presentation-attack detection from a single selfie,
+    trained on 850M+ liveness checks. Delivered primarily through HyperVerge's mobile
+    SDKs and the hosted onboarding Workflow; a standalone documented public REST
+    endpoint for liveness was not confirmed in HyperVerge's published REST-API repos
+    at review time, so no OpenAPI operation is asserted here.
+common:
+- type: DomainSecurity
+  url: security/hyperverge-domain-security.yml
+- type: Authentication
+  url: authentication/hyperverge-authentication.yml
+- type: GitHubOrganization
+  url: https://github.com/hyperverge
+- type: LinkedIn
+  url: https://www.linkedin.com/company/hyperverge
+- type: Website
+  url: https://hyperverge.co
+- type: Documentation
+  url: https://documentation.hyperverge.co/
+- type: Plans
+  url: plans/hyperverge-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/hyperverge-rate-limits.yml
+- type: FinOps
+  url: finops/hyperverge-finops.yml
+- url: https://hyperverge.co/blog/
+  type: Blog
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

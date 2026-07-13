@@ -1,0 +1,101 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: HyperVerge
+providerId: hyperverge
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Identity Verification
+- KYC
+- India
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of HyperVerge spend. HyperVerge bills identity verification on a
+  quote-based, volume-tiered model (Start / Grow / Enterprise). The dominant
+  cost driver is the number of verifications performed - each document OCR / KYC
+  extraction, face match, liveness check, or database verification is a billable
+  transaction, with the per-verification unit rate decreasing as monthly volume
+  increases. Advanced fraud-prevention modules can add incremental cost. There
+  is no public per-unit price; amounts are negotiated with HyperVerge and are not
+  reconciled here.
+notes: >-
+  Per-verification rates are quote-only and were not published at review time.
+  For cost control, track billable verifications per module and per region host,
+  and negotiate volume tiers against forecast onboarding volume. Reconcile actual
+  unit rates and any module surcharges with HyperVerge sales.
+sources:
+- https://hyperverge.co/pricing/
+- https://hyperverge.co/blog/cost-of-kyc/
+- https://documentation.hyperverge.co/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: HyperVerge
+serviceCategory: Identity and Fraud Prevention
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: HyperVerge Identity Verification
+  ServiceCategory: Identity and Fraud Prevention
+  ProviderName: HyperVerge
+  PublisherName: HyperVerge
+  InvoiceIssuerName: HyperVerge
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Usage-Based
+meters:
+- name: kyc_verifications
+  description: Document OCR / KYC extraction calls (readKYC, readPAN, readAadhaar, readPassport, readVoterID), billed per verification.
+  unit: verifications
+  aggregation: sum
+  dimensions:
+  - account
+  - document_type
+  - region
+- name: face_match_checks
+  description: Face match (verifyPair) calls, billed per verification.
+  unit: verifications
+  aggregation: sum
+  dimensions:
+  - account
+  - region
+- name: liveness_checks
+  description: Passive liveness / presentation-attack checks (via SDK/Workflow), billed per verification.
+  unit: verifications
+  aggregation: sum
+  dimensions:
+  - account
+  - region
+- name: database_verifications
+  description: Central database verification calls (verifyPAN, checkDL, checkVoterId, checkBankAccount, getNameFromPAN), billed per verification.
+  unit: verifications
+  aggregation: sum
+  dimensions:
+  - account
+  - document_type
+principles:
+- name: Visibility
+  description: Track billable verifications by module (OCR, face match, liveness, database) and by region host so cost maps to onboarding funnels.
+- name: Allocation
+  description: Use referenceId / transactionid on requests to attribute verifications to products, teams, or campaigns.
+- name: Optimization
+  description: Order the onboarding flow to fail fast (cheap validation before costlier database or biometric checks) and avoid redundant re-verifications; negotiate volume tiers against forecast volume.
+- name: Accountability
+  description: Assign owners per onboarding flow and review monthly verification counts and unit rates against the negotiated plan.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
