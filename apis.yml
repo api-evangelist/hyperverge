@@ -168,6 +168,8 @@ apis:
     endpoint for liveness was not confirmed in HyperVerge's published REST-API repos
     at review time, so no OpenAPI operation is asserted here.
 common:
+- type: AgenticAccess
+  url: agentic-access/hyperverge-agentic-access.yml
 - type: DomainSecurity
   url: security/hyperverge-domain-security.yml
 - type: Authentication
