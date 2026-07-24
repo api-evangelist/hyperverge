@@ -1,0 +1,101 @@
+openapi: 3.0.3
+info:
+  title: HyperVerge Identity Verification Database Verification Matching API
+  description: "HyperVerge is an AI-based identity verification and customer onboarding platform. This document models HyperVerge's documented public REST surface for India, drawn from HyperVerge's official REST-API documentation repositories on GitHub. The surface spans three region hosts:\n\n\n  * `https://ind-docs.hyperverge.co/v2.0` - KYC document OCR / extraction.\n\n  * `https://ind-verify.hyperverge.co` - central database verification,\n    input validation, and field matching.\n\n  * `https://ind-faceid.hyperverge.co` - face match.\n\n\nAll requests authenticate with an `appId` and `appKey` pair issued by the HyperVerge team (headers are lowercase `appid`/`appkey` on the Face Match host). Credentials are provided after enterprise onboarding. Region hosts exist for other geographies (for example `apac.faceid.hyperverge.co` for Face Match in APAC); only the India hosts are modeled here.\n\nScope note: endpoint paths, methods, and auth are grounded in HyperVerge's published REST documentation. Request/response schemas are modeled representatively (multipart form-data and JSON bodies) rather than copied field-for-field, and are flagged where they are approximate. Liveness detection is delivered via HyperVerge's SDKs/Workflow and is not modeled as a REST operation here because a standalone public REST endpoint was not confirmed at review time."
+  version: '1.0'
+  contact:
+    name: HyperVerge
+    url: https://hyperverge.co
+  x-modeled-note: Paths, methods, hosts, and appId/appKey auth are confirmed from HyperVerge's public REST-API repositories. Response schemas are representative models, not verbatim contracts.
+servers:
+- url: https://ind-verify.hyperverge.co
+  description: India - Database Verification, Input Validation, Matching
+- url: https://ind-docs.hyperverge.co/v2.0
+  description: India - KYC OCR / Extraction
+- url: https://ind-faceid.hyperverge.co
+  description: India - Face Match
+security:
+- appIdKey: []
+tags:
+- name: Matching
+  description: Fuzzy and direct field matching.
+paths:
+  /api/matchFields:
+    servers:
+    - url: https://ind-verify.hyperverge.co
+    post:
+      operationId: matchFields
+      tags:
+      - Matching
+      summary: Match field pairs
+      description: Compares two values across supported fields. Fuzzy matching is applied to name and address; direct matching to fields such as dob, pan_no, aadhaar, passport_num, voterid, phone, gender, and others. Returns a per-field result plus an overall `all` flag.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: object
+                properties:
+                  value1:
+                    type: string
+                  value2:
+                    type: string
+              example:
+                name:
+                  value1: Jane Doe
+                  value2: Jane A Doe
+                dob:
+                  value1: 01/01/1990
+                  value2: 01/01/1990
+      responses:
+        '200':
+          description: Per-field match result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    ValidationResult:
+      type: object
+      description: Representative per-field match response (modeled).
+      properties:
+        status:
+          type: string
+          example: success
+        statusCode:
+          type: string
+          example: '200'
+        result:
+          type: object
+          additionalProperties: true
+          description: Per-field match flags, plus an overall `all` flag on matchFields.
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+          example: failure
+        statusCode:
+          type: string
+          example: '401'
+        error:
+          type: string
+          example: Invalid credentials.
+  responses:
+    Unauthorized:
+      description: Invalid or missing appId/appKey credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    appIdKey:
+      type: apiKey
+      in: header
+      name: appId
+      description: 'HyperVerge issues an appId and appKey pair after enterprise onboarding. Both are sent as request headers: `appId` and `appKey` on the ind-docs and ind-verify hosts, and lowercase `appid` and `appkey` on the ind-faceid (Face Match) host. Do not expose these credentials in browser applications.'

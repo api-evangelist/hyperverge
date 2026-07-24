@@ -1,0 +1,217 @@
+openapi: 3.0.3
+info:
+  title: HyperVerge Identity Verification Database Verification KYC OCR API
+  description: "HyperVerge is an AI-based identity verification and customer onboarding platform. This document models HyperVerge's documented public REST surface for India, drawn from HyperVerge's official REST-API documentation repositories on GitHub. The surface spans three region hosts:\n\n\n  * `https://ind-docs.hyperverge.co/v2.0` - KYC document OCR / extraction.\n\n  * `https://ind-verify.hyperverge.co` - central database verification,\n    input validation, and field matching.\n\n  * `https://ind-faceid.hyperverge.co` - face match.\n\n\nAll requests authenticate with an `appId` and `appKey` pair issued by the HyperVerge team (headers are lowercase `appid`/`appkey` on the Face Match host). Credentials are provided after enterprise onboarding. Region hosts exist for other geographies (for example `apac.faceid.hyperverge.co` for Face Match in APAC); only the India hosts are modeled here.\n\nScope note: endpoint paths, methods, and auth are grounded in HyperVerge's published REST documentation. Request/response schemas are modeled representatively (multipart form-data and JSON bodies) rather than copied field-for-field, and are flagged where they are approximate. Liveness detection is delivered via HyperVerge's SDKs/Workflow and is not modeled as a REST operation here because a standalone public REST endpoint was not confirmed at review time."
+  version: '1.0'
+  contact:
+    name: HyperVerge
+    url: https://hyperverge.co
+  x-modeled-note: Paths, methods, hosts, and appId/appKey auth are confirmed from HyperVerge's public REST-API repositories. Response schemas are representative models, not verbatim contracts.
+servers:
+- url: https://ind-verify.hyperverge.co
+  description: India - Database Verification, Input Validation, Matching
+- url: https://ind-docs.hyperverge.co/v2.0
+  description: India - KYC OCR / Extraction
+- url: https://ind-faceid.hyperverge.co
+  description: India - Face Match
+security:
+- appIdKey: []
+tags:
+- name: KYC OCR
+  description: Document OCR and KYC field extraction for Indian identity documents.
+paths:
+  /readKYC:
+    servers:
+    - url: https://ind-docs.hyperverge.co/v2.0
+    post:
+      operationId: readKYC
+      tags:
+      - KYC OCR
+      summary: Extract KYC fields (auto-detect document)
+      description: Auto-detects the supported Indian document type in the supplied image, PDF, or URL and extracts the relevant KYC fields.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OcrDocumentInput'
+      responses:
+        '200':
+          description: Extraction result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OcrResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /readPAN:
+    servers:
+    - url: https://ind-docs.hyperverge.co/v2.0
+    post:
+      operationId: readPAN
+      tags:
+      - KYC OCR
+      summary: Extract PAN card fields
+      description: Extracts fields from an Indian PAN card image, PDF, or URL.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OcrDocumentInput'
+      responses:
+        '200':
+          description: Extraction result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OcrResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /readAadhaar:
+    servers:
+    - url: https://ind-docs.hyperverge.co/v2.0
+    post:
+      operationId: readAadhaar
+      tags:
+      - KYC OCR
+      summary: Extract Aadhaar card fields
+      description: Extracts fields from an Aadhaar card image, PDF, or URL.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OcrDocumentInput'
+      responses:
+        '200':
+          description: Extraction result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OcrResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /readPassport:
+    servers:
+    - url: https://ind-docs.hyperverge.co/v2.0
+    post:
+      operationId: readPassport
+      tags:
+      - KYC OCR
+      summary: Extract Indian passport fields
+      description: Extracts fields from an Indian passport image, PDF, or URL.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OcrDocumentInput'
+      responses:
+        '200':
+          description: Extraction result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OcrResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /readVoterID:
+    servers:
+    - url: https://ind-docs.hyperverge.co/v2.0
+    post:
+      operationId: readVoterID
+      tags:
+      - KYC OCR
+      summary: Extract Voter ID fields
+      description: Extracts fields from a Voter ID (EPIC) card image, PDF, or URL.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OcrDocumentInput'
+      responses:
+        '200':
+          description: Extraction result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OcrResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    OcrDocumentInput:
+      type: object
+      description: Supply exactly one of image, pdf, or url. Modeled representatively from HyperVerge KYC docs.
+      properties:
+        image:
+          type: string
+          format: binary
+          description: Document image (JPEG, PNG, or TIFF).
+        pdf:
+          type: string
+          format: binary
+          description: Document as a PDF.
+        url:
+          type: string
+          format: uri
+          description: Publicly accessible URL to the document.
+        qualityCheck:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          description: Detect black/white or low-quality documents.
+        faceCheck:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          description: Verify a face is present on the document.
+        outputImageUrl:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          description: Return a cropped/aligned image URL.
+    OcrResult:
+      type: object
+      description: Representative KYC extraction response (modeled).
+      properties:
+        status:
+          type: string
+          example: success
+        statusCode:
+          type: string
+          example: '200'
+        result:
+          type: object
+          additionalProperties: true
+          description: Extracted document fields (fields vary by document type).
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+          example: failure
+        statusCode:
+          type: string
+          example: '401'
+        error:
+          type: string
+          example: Invalid credentials.
+  responses:
+    Unauthorized:
+      description: Invalid or missing appId/appKey credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    appIdKey:
+      type: apiKey
+      in: header
+      name: appId
+      description: 'HyperVerge issues an appId and appKey pair after enterprise onboarding. Both are sent as request headers: `appId` and `appKey` on the ind-docs and ind-verify hosts, and lowercase `appid` and `appkey` on the ind-faceid (Face Match) host. Do not expose these credentials in browser applications.'

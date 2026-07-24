@@ -1,0 +1,132 @@
+openapi: 3.0.3
+info:
+  title: HyperVerge Identity Verification Database Verification Face Match API
+  description: "HyperVerge is an AI-based identity verification and customer onboarding platform. This document models HyperVerge's documented public REST surface for India, drawn from HyperVerge's official REST-API documentation repositories on GitHub. The surface spans three region hosts:\n\n\n  * `https://ind-docs.hyperverge.co/v2.0` - KYC document OCR / extraction.\n\n  * `https://ind-verify.hyperverge.co` - central database verification,\n    input validation, and field matching.\n\n  * `https://ind-faceid.hyperverge.co` - face match.\n\n\nAll requests authenticate with an `appId` and `appKey` pair issued by the HyperVerge team (headers are lowercase `appid`/`appkey` on the Face Match host). Credentials are provided after enterprise onboarding. Region hosts exist for other geographies (for example `apac.faceid.hyperverge.co` for Face Match in APAC); only the India hosts are modeled here.\n\nScope note: endpoint paths, methods, and auth are grounded in HyperVerge's published REST documentation. Request/response schemas are modeled representatively (multipart form-data and JSON bodies) rather than copied field-for-field, and are flagged where they are approximate. Liveness detection is delivered via HyperVerge's SDKs/Workflow and is not modeled as a REST operation here because a standalone public REST endpoint was not confirmed at review time."
+  version: '1.0'
+  contact:
+    name: HyperVerge
+    url: https://hyperverge.co
+  x-modeled-note: Paths, methods, hosts, and appId/appKey auth are confirmed from HyperVerge's public REST-API repositories. Response schemas are representative models, not verbatim contracts.
+servers:
+- url: https://ind-verify.hyperverge.co
+  description: India - Database Verification, Input Validation, Matching
+- url: https://ind-docs.hyperverge.co/v2.0
+  description: India - KYC OCR / Extraction
+- url: https://ind-faceid.hyperverge.co
+  description: India - Face Match
+security:
+- appIdKey: []
+tags:
+- name: Face Match
+  description: Selfie-to-ID / selfie-to-selfie face comparison.
+paths:
+  /v1/photo/verifyPair:
+    servers:
+    - url: https://ind-faceid.hyperverge.co
+    get:
+      operationId: faceMatchHealthCheck
+      tags:
+      - Face Match
+      summary: Face Match health check
+      description: Returns the plain-text string "Hello!" to confirm connectivity.
+      responses:
+        '200':
+          description: Plain-text "Hello!".
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Hello!
+    post:
+      operationId: verifyPair
+      tags:
+      - Face Match
+      summary: Verify a face pair
+      description: Determines whether two face images belong to the same person. Supply either a selfie + id pair or a selfie + selfie2 pair. Uses lowercase `appid`/`appkey` headers on this host.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                selfie:
+                  type: string
+                  format: binary
+                  description: Selfie image (JPEG, PNG, or TIFF).
+                id:
+                  type: string
+                  format: binary
+                  description: ID document photo to match against the selfie.
+                selfie2:
+                  type: string
+                  format: binary
+                  description: Second selfie, for selfie-to-selfie matching.
+                allowMultipleFaces:
+                  type: string
+                  enum:
+                  - 'yes'
+                  - 'no'
+                enableDashboard:
+                  type: string
+                  enum:
+                  - 'yes'
+                  - 'no'
+      responses:
+        '200':
+          description: Face match result with a match score.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FaceMatchResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    FaceMatchResult:
+      type: object
+      description: Representative face-match response (modeled).
+      properties:
+        status:
+          type: string
+          example: success
+        statusCode:
+          type: string
+          example: '200'
+        result:
+          type: object
+          properties:
+            match:
+              type: object
+              properties:
+                value:
+                  type: string
+                  description: Match verdict (e.g. yes/no).
+                confidence:
+                  type: string
+                  description: Match confidence/score.
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+          example: failure
+        statusCode:
+          type: string
+          example: '401'
+        error:
+          type: string
+          example: Invalid credentials.
+  responses:
+    Unauthorized:
+      description: Invalid or missing appId/appKey credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    appIdKey:
+      type: apiKey
+      in: header
+      name: appId
+      description: 'HyperVerge issues an appId and appKey pair after enterprise onboarding. Both are sent as request headers: `appId` and `appKey` on the ind-docs and ind-verify hosts, and lowercase `appid` and `appkey` on the ind-faceid (Face Match) host. Do not expose these credentials in browser applications.'

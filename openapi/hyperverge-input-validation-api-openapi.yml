@@ -1,0 +1,178 @@
+openapi: 3.0.3
+info:
+  title: HyperVerge Identity Verification Database Verification Input Validation API
+  description: "HyperVerge is an AI-based identity verification and customer onboarding platform. This document models HyperVerge's documented public REST surface for India, drawn from HyperVerge's official REST-API documentation repositories on GitHub. The surface spans three region hosts:\n\n\n  * `https://ind-docs.hyperverge.co/v2.0` - KYC document OCR / extraction.\n\n  * `https://ind-verify.hyperverge.co` - central database verification,\n    input validation, and field matching.\n\n  * `https://ind-faceid.hyperverge.co` - face match.\n\n\nAll requests authenticate with an `appId` and `appKey` pair issued by the HyperVerge team (headers are lowercase `appid`/`appkey` on the Face Match host). Credentials are provided after enterprise onboarding. Region hosts exist for other geographies (for example `apac.faceid.hyperverge.co` for Face Match in APAC); only the India hosts are modeled here.\n\nScope note: endpoint paths, methods, and auth are grounded in HyperVerge's published REST documentation. Request/response schemas are modeled representatively (multipart form-data and JSON bodies) rather than copied field-for-field, and are flagged where they are approximate. Liveness detection is delivered via HyperVerge's SDKs/Workflow and is not modeled as a REST operation here because a standalone public REST endpoint was not confirmed at review time."
+  version: '1.0'
+  contact:
+    name: HyperVerge
+    url: https://hyperverge.co
+  x-modeled-note: Paths, methods, hosts, and appId/appKey auth are confirmed from HyperVerge's public REST-API repositories. Response schemas are representative models, not verbatim contracts.
+servers:
+- url: https://ind-verify.hyperverge.co
+  description: India - Database Verification, Input Validation, Matching
+- url: https://ind-docs.hyperverge.co/v2.0
+  description: India - KYC OCR / Extraction
+- url: https://ind-faceid.hyperverge.co
+  description: India - Face Match
+security:
+- appIdKey: []
+tags:
+- name: Input Validation
+  description: Cross-validation of user input against OCR/QR extraction output.
+paths:
+  /api/validatePANInput:
+    servers:
+    - url: https://ind-verify.hyperverge.co
+    post:
+      operationId: validatePANInput
+      tags:
+      - Input Validation
+      summary: Validate PAN input against OCR
+      description: Cross-validates user-entered PAN details against the OCR extraction result and returns per-field match flags.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidateInput'
+      responses:
+        '200':
+          description: Per-field validation result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/validateAadhaarInput:
+    servers:
+    - url: https://ind-verify.hyperverge.co
+    post:
+      operationId: validateAadhaarInput
+      tags:
+      - Input Validation
+      summary: Validate Aadhaar input against OCR/QR
+      description: Cross-validates user-entered Aadhaar details (or QR-extracted data) against front/back OCR results.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidateInput'
+      responses:
+        '200':
+          description: Per-field validation result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/validatePassportInput:
+    servers:
+    - url: https://ind-verify.hyperverge.co
+    post:
+      operationId: validatePassportInput
+      tags:
+      - Input Validation
+      summary: Validate passport input against OCR
+      description: Cross-validates user-entered passport details against front/back OCR results.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidateInput'
+      responses:
+        '200':
+          description: Per-field validation result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/validateVoterIdInput:
+    servers:
+    - url: https://ind-verify.hyperverge.co
+    post:
+      operationId: validateVoterIdInput
+      tags:
+      - Input Validation
+      summary: Validate Voter ID input against OCR
+      description: Cross-validates user-entered Voter ID details against front/back OCR results.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidateInput'
+      responses:
+        '200':
+          description: Per-field validation result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    ValidationResult:
+      type: object
+      description: Representative per-field match response (modeled).
+      properties:
+        status:
+          type: string
+          example: success
+        statusCode:
+          type: string
+          example: '200'
+        result:
+          type: object
+          additionalProperties: true
+          description: Per-field match flags, plus an overall `all` flag on matchFields.
+    ValidateInput:
+      type: object
+      description: Representative validation body (modeled). Carries user-entered values under `userInput` and the OCR/QR extraction under `ocrResult`, `ocrResultFront`/`ocrResultBack`, or `qrResult` depending on the document.
+      properties:
+        userInput:
+          type: object
+          additionalProperties: true
+        ocrResult:
+          type: object
+          additionalProperties: true
+        ocrResultFront:
+          type: object
+          additionalProperties: true
+        ocrResultBack:
+          type: object
+          additionalProperties: true
+        qrResult:
+          type: object
+          additionalProperties: true
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+          example: failure
+        statusCode:
+          type: string
+          example: '401'
+        error:
+          type: string
+          example: Invalid credentials.
+  responses:
+    Unauthorized:
+      description: Invalid or missing appId/appKey credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    appIdKey:
+      type: apiKey
+      in: header
+      name: appId
+      description: 'HyperVerge issues an appId and appKey pair after enterprise onboarding. Both are sent as request headers: `appId` and `appKey` on the ind-docs and ind-verify hosts, and lowercase `appid` and `appkey` on the ind-faceid (Face Match) host. Do not expose these credentials in browser applications.'

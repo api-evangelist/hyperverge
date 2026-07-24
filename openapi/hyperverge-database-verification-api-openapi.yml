@@ -1,0 +1,250 @@
+openapi: 3.0.3
+info:
+  title: HyperVerge Identity Verification Database Verification API
+  description: "HyperVerge is an AI-based identity verification and customer onboarding platform. This document models HyperVerge's documented public REST surface for India, drawn from HyperVerge's official REST-API documentation repositories on GitHub. The surface spans three region hosts:\n\n\n  * `https://ind-docs.hyperverge.co/v2.0` - KYC document OCR / extraction.\n\n  * `https://ind-verify.hyperverge.co` - central database verification,\n    input validation, and field matching.\n\n  * `https://ind-faceid.hyperverge.co` - face match.\n\n\nAll requests authenticate with an `appId` and `appKey` pair issued by the HyperVerge team (headers are lowercase `appid`/`appkey` on the Face Match host). Credentials are provided after enterprise onboarding. Region hosts exist for other geographies (for example `apac.faceid.hyperverge.co` for Face Match in APAC); only the India hosts are modeled here.\n\nScope note: endpoint paths, methods, and auth are grounded in HyperVerge's published REST documentation. Request/response schemas are modeled representatively (multipart form-data and JSON bodies) rather than copied field-for-field, and are flagged where they are approximate. Liveness detection is delivered via HyperVerge's SDKs/Workflow and is not modeled as a REST operation here because a standalone public REST endpoint was not confirmed at review time."
+  version: '1.0'
+  contact:
+    name: HyperVerge
+    url: https://hyperverge.co
+  x-modeled-note: Paths, methods, hosts, and appId/appKey auth are confirmed from HyperVerge's public REST-API repositories. Response schemas are representative models, not verbatim contracts.
+servers:
+- url: https://ind-verify.hyperverge.co
+  description: India - Database Verification, Input Validation, Matching
+- url: https://ind-docs.hyperverge.co/v2.0
+  description: India - KYC OCR / Extraction
+- url: https://ind-faceid.hyperverge.co
+  description: India - Face Match
+security:
+- appIdKey: []
+tags:
+- name: Database Verification
+  description: Central/government database verification for Indian documents.
+paths:
+  /api:
+    servers:
+    - url: https://ind-verify.hyperverge.co
+    get:
+      operationId: verifyHealthCheck
+      tags:
+      - Database Verification
+      summary: Connection health check
+      description: Returns the plain-text string "Aok" to confirm connectivity.
+      responses:
+        '200':
+          description: Plain-text "Aok".
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Aok
+  /api/verifyPAN:
+    servers:
+    - url: https://ind-verify.hyperverge.co
+    post:
+      operationId: verifyPAN
+      tags:
+      - Database Verification
+      summary: Verify PAN against central database
+      description: Verifies a PAN number against name and date of birth.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyPanInput'
+      responses:
+        '200':
+          description: Verification result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerificationResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/getNameFromPAN:
+    servers:
+    - url: https://ind-verify.hyperverge.co
+    post:
+      operationId: getNameFromPAN
+      tags:
+      - Database Verification
+      summary: Get registered name from PAN
+      description: Returns the registered holder name for a PAN number.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - pan
+              properties:
+                pan:
+                  type: string
+                  description: PAN in CCCCCDDDDC format.
+                  example: ABCDE1234F
+      responses:
+        '200':
+          description: Verification result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerificationResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/checkDL:
+    servers:
+    - url: https://ind-verify.hyperverge.co
+    post:
+      operationId: checkDL
+      tags:
+      - Database Verification
+      summary: Verify Driving License
+      description: Verifies and extracts driving-license data by DL number and date of birth.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - dlNumber
+              - dob
+              properties:
+                dlNumber:
+                  type: string
+                  description: Driving license number (9-20 characters).
+                dob:
+                  type: string
+                  description: Date of birth in DD-MM-YYYY format.
+                  example: 01-01-1990
+      responses:
+        '200':
+          description: Verification result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerificationResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/checkVoterId:
+    servers:
+    - url: https://ind-verify.hyperverge.co
+    post:
+      operationId: checkVoterId
+      tags:
+      - Database Verification
+      summary: Verify Voter ID (EPIC)
+      description: Extracts and verifies Voter ID information by EPIC number.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - epicNumber
+              properties:
+                epicNumber:
+                  type: string
+                  description: Voter ID EPIC number (6-13 characters).
+      responses:
+        '200':
+          description: Verification result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerificationResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/checkBankAccount:
+    servers:
+    - url: https://ind-verify.hyperverge.co
+    post:
+      operationId: checkBankAccount
+      tags:
+      - Database Verification
+      summary: Verify bank account
+      description: Verifies bank account details by IFSC and account number.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - ifsc
+              - accountNumber
+              properties:
+                ifsc:
+                  type: string
+                  description: IFSC code (11 characters).
+                accountNumber:
+                  type: string
+                  description: Bank account number.
+      responses:
+        '200':
+          description: Verification result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerificationResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    VerificationResult:
+      type: object
+      description: Representative database-verification response (modeled).
+      properties:
+        status:
+          type: string
+          example: success
+        statusCode:
+          type: string
+          example: '200'
+        result:
+          type: object
+          additionalProperties: true
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+          example: failure
+        statusCode:
+          type: string
+          example: '401'
+        error:
+          type: string
+          example: Invalid credentials.
+    VerifyPanInput:
+      type: object
+      required:
+      - pan
+      - name
+      - dob
+      properties:
+        pan:
+          type: string
+          description: PAN in CCCCCDDDDC format.
+          example: ABCDE1234F
+        name:
+          type: string
+        dob:
+          type: string
+          description: Date of birth in DD/MM/YYYY format.
+          example: 01/01/1990
+  responses:
+    Unauthorized:
+      description: Invalid or missing appId/appKey credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    appIdKey:
+      type: apiKey
+      in: header
+      name: appId
+      description: 'HyperVerge issues an appId and appKey pair after enterprise onboarding. Both are sent as request headers: `appId` and `appKey` on the ind-docs and ind-verify hosts, and lowercase `appid` and `appkey` on the ind-faceid (Face Match) host. Do not expose these credentials in browser applications.'
