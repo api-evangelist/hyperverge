@@ -11,7 +11,20 @@ description: HyperVerge is an AI-based identity verification and customer onboar
   region-hosted (India `ind-*`, plus APAC/other regions) and authenticated with an
   appId and appKey issued by HyperVerge; enterprise onboarding is required to obtain
   credentials.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/hyperverge.png
 tags:
 - Identity Verification
 - KYC
@@ -27,129 +40,6 @@ created: '2026-07-12'
 modified: '2026-07-12'
 specificationVersion: '0.19'
 apis:
-- aid: hyperverge:hyperverge-kyc-ocr-api
-  name: HyperVerge KYC OCR API
-  tags:
-  - KYC
-  - OCR
-  - Document Verification
-  - India
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://documentation.hyperverge.co/
-  baseURL: https://ind-docs.hyperverge.co/v2.0
-  properties:
-  - url: https://github.com/hyperverge/kyc-india-rest-api
-    type: Documentation
-  - url: https://github.com/hyperverge/kyc-india-rest-api/blob/master/README.md
-    type: APIReference
-  - url: openapi/hyperverge-openapi.yml
-    type: OpenAPI
-  - url: collections/hyperverge.postman_collection.json
-    type: PostmanCollection
-  - url: collections/hyperverge.opencollection.json
-    type: OpenCollection
-  description: Image/PDF OCR and KYC extraction for Indian identity documents. `readKYC`
-    auto-detects the document type; dedicated endpoints extract PAN, Aadhaar, Passport,
-    and Voter ID fields. Supports quality checks, face presence checks, and cropped
-    image output. Multipart form-data with appId/appKey headers.
-- aid: hyperverge:hyperverge-database-verification-api
-  name: HyperVerge Database Verification API
-  tags:
-  - Database Verification
-  - PAN
-  - Driving License
-  - Voter ID
-  - AML
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://documentation.hyperverge.co/
-  baseURL: https://ind-verify.hyperverge.co
-  properties:
-  - url: https://github.com/hyperverge/db-verification-india-rest-api
-    type: Documentation
-  - url: https://github.com/hyperverge/db-verification-india-rest-api/blob/master/README.md
-    type: APIReference
-  - url: openapi/hyperverge-openapi.yml
-    type: OpenAPI
-  - url: collections/hyperverge.postman_collection.json
-    type: PostmanCollection
-  - url: collections/hyperverge.opencollection.json
-    type: OpenCollection
-  description: Central-database (government source) verification for Indian documents -
-    verify a PAN with name and date of birth, fetch the registered name from a PAN,
-    validate a Driving License, check a Voter ID (EPIC), and verify bank account
-    details via IFSC and account number. JSON with appId/appKey headers.
-- aid: hyperverge:hyperverge-input-validation-api
-  name: HyperVerge Input Validation API
-  tags:
-  - Validation
-  - KYC
-  - Onboarding
-  - India
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://documentation.hyperverge.co/
-  baseURL: https://ind-verify.hyperverge.co
-  properties:
-  - url: https://github.com/hyperverge/validation-india-rest-api
-    type: Documentation
-  - url: https://github.com/hyperverge/validation-india-rest-api/blob/master/README.md
-    type: APIReference
-  - url: openapi/hyperverge-openapi.yml
-    type: OpenAPI
-  - url: collections/hyperverge.postman_collection.json
-    type: PostmanCollection
-  - url: collections/hyperverge.opencollection.json
-    type: OpenCollection
-  description: Cross-validates user-entered identity details against OCR (or QR) output
-    for PAN, Aadhaar, Passport, and Voter ID during onboarding, returning per-field
-    match results. JSON with appId/appKey headers.
-- aid: hyperverge:hyperverge-matching-api
-  name: HyperVerge Matching API
-  tags:
-  - Matching
-  - Fuzzy Match
-  - Onboarding
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://documentation.hyperverge.co/
-  baseURL: https://ind-verify.hyperverge.co
-  properties:
-  - url: https://github.com/hyperverge/matching-india-rest-api
-    type: Documentation
-  - url: https://github.com/hyperverge/matching-india-rest-api/blob/master/README.md
-    type: APIReference
-  - url: openapi/hyperverge-openapi.yml
-    type: OpenAPI
-  - url: collections/hyperverge.postman_collection.json
-    type: PostmanCollection
-  - url: collections/hyperverge.opencollection.json
-    type: OpenCollection
-  description: Compares two values across supported identity fields via `matchFields` -
-    fuzzy matching for name and address, direct matching for fields such as DOB, PAN,
-    Aadhaar, Passport, Voter ID, phone, and gender - returning per-field and overall
-    match flags. JSON with appId/appKey headers.
-- aid: hyperverge:hyperverge-face-match-api
-  name: HyperVerge Face Match API
-  tags:
-  - Face Authentication
-  - Face Match
-  - Biometrics
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://documentation.hyperverge.co/
-  baseURL: https://ind-faceid.hyperverge.co
-  properties:
-  - url: https://github.com/hyperverge/face-match-india-rest-api
-    type: Documentation
-  - url: https://github.com/hyperverge/face-match-india-rest-api/blob/master/README.md
-    type: APIReference
-  - url: openapi/hyperverge-openapi.yml
-    type: OpenAPI
-  - url: collections/hyperverge.postman_collection.json
-    type: PostmanCollection
-  - url: collections/hyperverge.opencollection.json
-    type: OpenCollection
-  description: Determines whether two face images belong to the same person via
-    `POST /v1/photo/verifyPair` - selfie-to-ID or selfie-to-selfie - returning a
-    match score. Multipart form-data with appId/appKey headers. APAC region is served
-    at `apac.faceid.hyperverge.co`.
 - aid: hyperverge:hyperverge-liveness-api
   name: HyperVerge Liveness Detection
   tags:
@@ -162,11 +52,181 @@ apis:
   properties:
   - url: https://hyperverge.co/in/integrations-marketplace/facial-recognition-api/
     type: Documentation
-  description: Passive liveness / presentation-attack detection from a single selfie,
-    trained on 850M+ liveness checks. Delivered primarily through HyperVerge's mobile
-    SDKs and the hosted onboarding Workflow; a standalone documented public REST
-    endpoint for liveness was not confirmed in HyperVerge's published REST-API repos
-    at review time, so no OpenAPI operation is asserted here.
+  description: >-
+    Passive liveness / presentation-attack detection from a single selfie, trained on 850M+ liveness checks.
+    Delivered primarily through HyperVerge's mobile SDKs and the hosted onboarding Workflow; a standalone
+    documented public REST endpoint for liveness was not confirmed in HyperVerge's published REST-API
+    repos at review time, so no OpenAPI operation is asserted here.
+- aid: hyperverge:hyperverge-database-verification-api
+  name: HyperVerge Database Verification API
+  description: Central/government database verification for Indian documents.
+  humanURL: https://documentation.hyperverge.co/
+  baseURL: https://ind-docs.hyperverge.co/v2.0
+  tags:
+  - Database Verification
+  properties:
+  - type: OpenAPI
+    url: openapi/hyperverge-database-verification-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/hyperverge/kyc-india-rest-api
+  - type: APIReference
+    url: https://github.com/hyperverge/kyc-india-rest-api/blob/master/README.md
+  - type: PostmanCollection
+    url: collections/hyperverge.postman_collection.json
+  - type: OpenCollection
+    url: collections/hyperverge.opencollection.json
+  - type: Documentation
+    url: https://github.com/hyperverge/db-verification-india-rest-api
+  - type: APIReference
+    url: https://github.com/hyperverge/db-verification-india-rest-api/blob/master/README.md
+  - type: Documentation
+    url: https://github.com/hyperverge/validation-india-rest-api
+  - type: APIReference
+    url: https://github.com/hyperverge/validation-india-rest-api/blob/master/README.md
+  - type: Documentation
+    url: https://github.com/hyperverge/matching-india-rest-api
+  - type: APIReference
+    url: https://github.com/hyperverge/matching-india-rest-api/blob/master/README.md
+  - type: Documentation
+    url: https://github.com/hyperverge/face-match-india-rest-api
+  - type: APIReference
+    url: https://github.com/hyperverge/face-match-india-rest-api/blob/master/README.md
+- aid: hyperverge:hyperverge-face-match-api
+  name: HyperVerge Face Match API
+  description: Selfie-to-ID / selfie-to-selfie face comparison.
+  humanURL: https://documentation.hyperverge.co/
+  baseURL: https://ind-docs.hyperverge.co/v2.0
+  tags:
+  - Face Match
+  properties:
+  - type: OpenAPI
+    url: openapi/hyperverge-face-match-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/hyperverge/kyc-india-rest-api
+  - type: APIReference
+    url: https://github.com/hyperverge/kyc-india-rest-api/blob/master/README.md
+  - type: PostmanCollection
+    url: collections/hyperverge.postman_collection.json
+  - type: OpenCollection
+    url: collections/hyperverge.opencollection.json
+  - type: Documentation
+    url: https://github.com/hyperverge/db-verification-india-rest-api
+  - type: APIReference
+    url: https://github.com/hyperverge/db-verification-india-rest-api/blob/master/README.md
+  - type: Documentation
+    url: https://github.com/hyperverge/validation-india-rest-api
+  - type: APIReference
+    url: https://github.com/hyperverge/validation-india-rest-api/blob/master/README.md
+  - type: Documentation
+    url: https://github.com/hyperverge/matching-india-rest-api
+  - type: APIReference
+    url: https://github.com/hyperverge/matching-india-rest-api/blob/master/README.md
+  - type: Documentation
+    url: https://github.com/hyperverge/face-match-india-rest-api
+  - type: APIReference
+    url: https://github.com/hyperverge/face-match-india-rest-api/blob/master/README.md
+- aid: hyperverge:hyperverge-input-validation-api
+  name: HyperVerge Input Validation API
+  description: Cross-validation of user input against OCR/QR extraction output.
+  humanURL: https://documentation.hyperverge.co/
+  baseURL: https://ind-docs.hyperverge.co/v2.0
+  tags:
+  - Input Validation
+  properties:
+  - type: OpenAPI
+    url: openapi/hyperverge-input-validation-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/hyperverge/kyc-india-rest-api
+  - type: APIReference
+    url: https://github.com/hyperverge/kyc-india-rest-api/blob/master/README.md
+  - type: PostmanCollection
+    url: collections/hyperverge.postman_collection.json
+  - type: OpenCollection
+    url: collections/hyperverge.opencollection.json
+  - type: Documentation
+    url: https://github.com/hyperverge/db-verification-india-rest-api
+  - type: APIReference
+    url: https://github.com/hyperverge/db-verification-india-rest-api/blob/master/README.md
+  - type: Documentation
+    url: https://github.com/hyperverge/validation-india-rest-api
+  - type: APIReference
+    url: https://github.com/hyperverge/validation-india-rest-api/blob/master/README.md
+  - type: Documentation
+    url: https://github.com/hyperverge/matching-india-rest-api
+  - type: APIReference
+    url: https://github.com/hyperverge/matching-india-rest-api/blob/master/README.md
+  - type: Documentation
+    url: https://github.com/hyperverge/face-match-india-rest-api
+  - type: APIReference
+    url: https://github.com/hyperverge/face-match-india-rest-api/blob/master/README.md
+- aid: hyperverge:hyperverge-kyc-ocr-api
+  name: HyperVerge KYC OCR API
+  description: Document OCR and KYC field extraction for Indian identity documents.
+  humanURL: https://documentation.hyperverge.co/
+  baseURL: https://ind-docs.hyperverge.co/v2.0
+  tags:
+  - KYC OCR
+  properties:
+  - type: OpenAPI
+    url: openapi/hyperverge-kyc-ocr-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/hyperverge/kyc-india-rest-api
+  - type: APIReference
+    url: https://github.com/hyperverge/kyc-india-rest-api/blob/master/README.md
+  - type: PostmanCollection
+    url: collections/hyperverge.postman_collection.json
+  - type: OpenCollection
+    url: collections/hyperverge.opencollection.json
+  - type: Documentation
+    url: https://github.com/hyperverge/db-verification-india-rest-api
+  - type: APIReference
+    url: https://github.com/hyperverge/db-verification-india-rest-api/blob/master/README.md
+  - type: Documentation
+    url: https://github.com/hyperverge/validation-india-rest-api
+  - type: APIReference
+    url: https://github.com/hyperverge/validation-india-rest-api/blob/master/README.md
+  - type: Documentation
+    url: https://github.com/hyperverge/matching-india-rest-api
+  - type: APIReference
+    url: https://github.com/hyperverge/matching-india-rest-api/blob/master/README.md
+  - type: Documentation
+    url: https://github.com/hyperverge/face-match-india-rest-api
+  - type: APIReference
+    url: https://github.com/hyperverge/face-match-india-rest-api/blob/master/README.md
+- aid: hyperverge:hyperverge-matching-api
+  name: HyperVerge Matching API
+  description: Fuzzy and direct field matching.
+  humanURL: https://documentation.hyperverge.co/
+  baseURL: https://ind-docs.hyperverge.co/v2.0
+  tags:
+  - Matching
+  properties:
+  - type: OpenAPI
+    url: openapi/hyperverge-matching-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/hyperverge/kyc-india-rest-api
+  - type: APIReference
+    url: https://github.com/hyperverge/kyc-india-rest-api/blob/master/README.md
+  - type: PostmanCollection
+    url: collections/hyperverge.postman_collection.json
+  - type: OpenCollection
+    url: collections/hyperverge.opencollection.json
+  - type: Documentation
+    url: https://github.com/hyperverge/db-verification-india-rest-api
+  - type: APIReference
+    url: https://github.com/hyperverge/db-verification-india-rest-api/blob/master/README.md
+  - type: Documentation
+    url: https://github.com/hyperverge/validation-india-rest-api
+  - type: APIReference
+    url: https://github.com/hyperverge/validation-india-rest-api/blob/master/README.md
+  - type: Documentation
+    url: https://github.com/hyperverge/matching-india-rest-api
+  - type: APIReference
+    url: https://github.com/hyperverge/matching-india-rest-api/blob/master/README.md
+  - type: Documentation
+    url: https://github.com/hyperverge/face-match-india-rest-api
+  - type: APIReference
+    url: https://github.com/hyperverge/face-match-india-rest-api/blob/master/README.md
 common:
 - type: AgenticAccess
   url: agentic-access/hyperverge-agentic-access.yml
