@@ -1,0 +1,22 @@
+{
+  "provider": "hyperverge",
+  "sources": [
+    "hyperverge-database-verification-api-openapi.yml",
+    "hyperverge-face-match-api-openapi.yml",
+    "hyperverge-input-validation-api-openapi.yml",
+    "hyperverge-kyc-ocr-api-openapi.yml",
+    "hyperverge-matching-api-openapi.yml"
+  ],
+  "outputs": [
+    "hyperverge-database-verification-api-openapi.yml",
+    "hyperverge-face-match-api-openapi.yml",
+    "hyperverge-input-validation-api-openapi.yml",
+    "hyperverge-kyc-ocr-api-openapi.yml",
+    "hyperverge-matching-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
