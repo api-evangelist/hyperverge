@@ -1,0 +1,397 @@
+{
+  "item": [
+    {
+      "id": "a6907144-7446-40dd-9046-075c9349f5ac",
+      "name": "Face Match",
+      "description": {
+        "content": "Selfie-to-ID / selfie-to-selfie face comparison.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "71f42ed6-1d07-40d1-9d06-49b6a85ca894",
+          "name": "Face Match health check",
+          "request": {
+            "name": "Face Match health check",
+            "description": {
+              "content": "Returns the plain-text string \"Hello!\" to confirm connectivity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "photo",
+                "verifyPair"
+              ],
+              "host": [
+                "{{v1-photo-verifyPair-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0330c092-4877-451e-9089-c9a2020094b2",
+              "name": "Plain-text \"Hello!\".",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "photo",
+                    "verifyPair"
+                  ],
+                  "host": [
+                    "{{v1-photo-verifyPair-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Hello!",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97c06b47-24ad-4067-9082-2e71c1869bf5",
+          "name": "Verify a face pair",
+          "request": {
+            "name": "Verify a face pair",
+            "description": {
+              "content": "Determines whether two face images belong to the same person. Supply either a selfie + id pair or a selfie + selfie2 pair. Uses lowercase `appid`/`appkey` headers on this host.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "photo",
+                "verifyPair"
+              ],
+              "host": [
+                "{{v1-photo-verifyPair-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "selfie",
+                  "type": "file",
+                  "description": "Selfie image (JPEG, PNG, or TIFF)."
+                },
+                {
+                  "key": "id",
+                  "type": "file",
+                  "description": "ID document photo to match against the selfie."
+                },
+                {
+                  "key": "selfie2",
+                  "type": "file",
+                  "description": "Second selfie, for selfie-to-selfie matching."
+                },
+                {
+                  "key": "allowMultipleFaces",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": " (This can only be one of yes,no)"
+                },
+                {
+                  "key": "enableDashboard",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": " (This can only be one of yes,no)"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f2ffb864-4bb8-4a83-8a0b-e42a50254e2b",
+              "name": "Face match result with a match score.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "photo",
+                    "verifyPair"
+                  ],
+                  "host": [
+                    "{{v1-photo-verifyPair-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Selfie image (JPEG, PNG, or TIFF).",
+                        "type": "text/plain"
+                      },
+                      "key": "selfie",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "ID document photo to match against the selfie.",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Second selfie, for selfie-to-selfie matching.",
+                        "type": "text/plain"
+                      },
+                      "key": "selfie2",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": " (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "allowMultipleFaces",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": " (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "enableDashboard",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"statusCode\": \"200\",\n  \"result\": {\n    \"match\": {\n      \"value\": \"string\",\n      \"confidence\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94b12c16-6f36-4e2d-bd0f-35dc6c44268f",
+              "name": "Invalid or missing appId/appKey credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "photo",
+                    "verifyPair"
+                  ],
+                  "host": [
+                    "{{v1-photo-verifyPair-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Selfie image (JPEG, PNG, or TIFF).",
+                        "type": "text/plain"
+                      },
+                      "key": "selfie",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "ID document photo to match against the selfie.",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Second selfie, for selfie-to-selfie matching.",
+                        "type": "text/plain"
+                      },
+                      "key": "selfie2",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": " (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "allowMultipleFaces",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": " (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "enableDashboard",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"statusCode\": \"401\",\n  \"error\": \"Invalid credentials.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ind-verify.hyperverge.co",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://ind-faceid.hyperverge.co",
+      "key": "v1-photo-verifyPair-Url"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "appId"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "226767f3-4b42-4880-8cef-ecb3e53d1261",
+    "name": "HyperVerge Identity Verification Database Verification Face Match API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "HyperVerge is an AI-based identity verification and customer onboarding platform. This document models HyperVerge's documented public REST surface for India, drawn from HyperVerge's official REST-API documentation repositories on GitHub. The surface spans three region hosts:\n\n\n  * `https://ind-docs.hyperverge.co/v2.0` - KYC document OCR / extraction.\n\n  * `https://ind-verify.hyperverge.co` - central database verification,\n    input validation, and field matching.\n\n  * `https://ind-faceid.hyperverge.co` - face match.\n\n\nAll requests authenticate with an `appId` and `appKey` pair issued by the HyperVerge team (headers are lowercase `appid`/`appkey` on the Face Match host). Credentials are provided after enterprise onboarding. Region hosts exist for other geographies (for example `apac.faceid.hyperverge.co` for Face Match in APAC); only the India hosts are modeled here.\n\nScope note: endpoint paths, methods, and auth are grounded in HyperVerge's published REST documentation. Request/response schemas are modeled representatively (multipart form-data and JSON bodies) rather than copied field-for-field, and are flagged where they are approximate. Liveness detection is delivered via HyperVerge's SDKs/Workflow and is not modeled as a REST operation here because a standalone public REST endpoint was not confirmed at review time.\n\nContact Support:\n Name: HyperVerge",
+      "type": "text/plain"
+    }
+  }
+}

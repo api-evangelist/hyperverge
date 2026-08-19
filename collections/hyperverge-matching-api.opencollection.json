@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "HyperVerge Identity Verification Database Verification Matching API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "appId",
+      "value": "{{appId}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Matching",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Match field pairs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-verify.hyperverge.co/api/matchFields",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Compares two values across supported fields. Fuzzy matching is applied to name and address; direct matching to fields such as dob, pan_no, aadhaar, passport_num, voterid, phone, gender, and others. Returns a per-field result plus an overall `all` flag."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

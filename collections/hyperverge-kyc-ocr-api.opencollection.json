@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "HyperVerge Identity Verification Database Verification KYC OCR API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "appId",
+      "value": "{{appId}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "KYC OCR",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Extract KYC fields (auto-detect document)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-verify.hyperverge.co/readKYC",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Auto-detects the supported Indian document type in the supplied image, PDF, or URL and extracts the relevant KYC fields."
+        },
+        {
+          "info": {
+            "name": "Extract PAN card fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-verify.hyperverge.co/readPAN",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Extracts fields from an Indian PAN card image, PDF, or URL."
+        },
+        {
+          "info": {
+            "name": "Extract Aadhaar card fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-verify.hyperverge.co/readAadhaar",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Extracts fields from an Aadhaar card image, PDF, or URL."
+        },
+        {
+          "info": {
+            "name": "Extract Indian passport fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-verify.hyperverge.co/readPassport",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Extracts fields from an Indian passport image, PDF, or URL."
+        },
+        {
+          "info": {
+            "name": "Extract Voter ID fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-verify.hyperverge.co/readVoterID",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Extracts fields from a Voter ID (EPIC) card image, PDF, or URL."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

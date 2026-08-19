@@ -1,0 +1,681 @@
+{
+  "item": [
+    {
+      "id": "f27622b7-5143-42d4-b96f-28f54810641f",
+      "name": "Input Validation",
+      "description": {
+        "content": "Cross-validation of user input against OCR/QR extraction output.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "aec02d83-8dc4-4e78-953f-8f3722b09bfd",
+          "name": "Validate PAN input against OCR",
+          "request": {
+            "name": "Validate PAN input against OCR",
+            "description": {
+              "content": "Cross-validates user-entered PAN details against the OCR extraction result and returns per-field match flags.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "validatePANInput"
+              ],
+              "host": [
+                "{{api-validatePANInput-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userInput\": {\n    \"key_0\": 7734.931372735419\n  },\n  \"ocrResult\": {\n    \"key_0\": false\n  },\n  \"ocrResultFront\": {\n    \"key_0\": false\n  },\n  \"ocrResultBack\": {\n    \"key_0\": 8821.13077942613,\n    \"key_1\": false,\n    \"key_2\": 9351,\n    \"key_3\": 9998.969098256048\n  },\n  \"qrResult\": {\n    \"key_0\": 5670.176691278396,\n    \"key_1\": 1156.5901023178415,\n    \"key_2\": \"string\",\n    \"key_3\": 3241.9262974034946\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2b24beac-f05b-4677-9470-eb0d0223d0ae",
+              "name": "Per-field validation result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "validatePANInput"
+                  ],
+                  "host": [
+                    "{{api-validatePANInput-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userInput\": {\n    \"key_0\": 7029,\n    \"key_1\": 2749.1797991017097,\n    \"key_2\": 9395.959088762353\n  },\n  \"ocrResult\": {\n    \"key_0\": \"string\",\n    \"key_1\": 2753.4605321529516\n  },\n  \"ocrResultFront\": {\n    \"key_0\": \"string\",\n    \"key_1\": 849\n  },\n  \"ocrResultBack\": {\n    \"key_0\": \"string\",\n    \"key_1\": true\n  },\n  \"qrResult\": {\n    \"key_0\": 2983,\n    \"key_1\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"statusCode\": \"200\",\n  \"result\": {\n    \"key_0\": true,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea9c1228-f43b-45fb-8264-3d507d918b8a",
+              "name": "Invalid or missing appId/appKey credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "validatePANInput"
+                  ],
+                  "host": [
+                    "{{api-validatePANInput-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userInput\": {\n    \"key_0\": 7029,\n    \"key_1\": 2749.1797991017097,\n    \"key_2\": 9395.959088762353\n  },\n  \"ocrResult\": {\n    \"key_0\": \"string\",\n    \"key_1\": 2753.4605321529516\n  },\n  \"ocrResultFront\": {\n    \"key_0\": \"string\",\n    \"key_1\": 849\n  },\n  \"ocrResultBack\": {\n    \"key_0\": \"string\",\n    \"key_1\": true\n  },\n  \"qrResult\": {\n    \"key_0\": 2983,\n    \"key_1\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"statusCode\": \"401\",\n  \"error\": \"Invalid credentials.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ad0722c-2e37-4980-bd1f-4e36bfb229ed",
+          "name": "Validate Aadhaar input against OCR/QR",
+          "request": {
+            "name": "Validate Aadhaar input against OCR/QR",
+            "description": {
+              "content": "Cross-validates user-entered Aadhaar details (or QR-extracted data) against front/back OCR results.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "validateAadhaarInput"
+              ],
+              "host": [
+                "{{api-validateAadhaarInput-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userInput\": {\n    \"key_0\": 7734.931372735419\n  },\n  \"ocrResult\": {\n    \"key_0\": false\n  },\n  \"ocrResultFront\": {\n    \"key_0\": false\n  },\n  \"ocrResultBack\": {\n    \"key_0\": 8821.13077942613,\n    \"key_1\": false,\n    \"key_2\": 9351,\n    \"key_3\": 9998.969098256048\n  },\n  \"qrResult\": {\n    \"key_0\": 5670.176691278396,\n    \"key_1\": 1156.5901023178415,\n    \"key_2\": \"string\",\n    \"key_3\": 3241.9262974034946\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "071063ea-7f19-4962-8454-f768b1bdb703",
+              "name": "Per-field validation result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "validateAadhaarInput"
+                  ],
+                  "host": [
+                    "{{api-validateAadhaarInput-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userInput\": {\n    \"key_0\": 7029,\n    \"key_1\": 2749.1797991017097,\n    \"key_2\": 9395.959088762353\n  },\n  \"ocrResult\": {\n    \"key_0\": \"string\",\n    \"key_1\": 2753.4605321529516\n  },\n  \"ocrResultFront\": {\n    \"key_0\": \"string\",\n    \"key_1\": 849\n  },\n  \"ocrResultBack\": {\n    \"key_0\": \"string\",\n    \"key_1\": true\n  },\n  \"qrResult\": {\n    \"key_0\": 2983,\n    \"key_1\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"statusCode\": \"200\",\n  \"result\": {\n    \"key_0\": true,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "533173c5-a5d5-4f54-bd63-51ed12e2afbf",
+              "name": "Invalid or missing appId/appKey credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "validateAadhaarInput"
+                  ],
+                  "host": [
+                    "{{api-validateAadhaarInput-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userInput\": {\n    \"key_0\": 7029,\n    \"key_1\": 2749.1797991017097,\n    \"key_2\": 9395.959088762353\n  },\n  \"ocrResult\": {\n    \"key_0\": \"string\",\n    \"key_1\": 2753.4605321529516\n  },\n  \"ocrResultFront\": {\n    \"key_0\": \"string\",\n    \"key_1\": 849\n  },\n  \"ocrResultBack\": {\n    \"key_0\": \"string\",\n    \"key_1\": true\n  },\n  \"qrResult\": {\n    \"key_0\": 2983,\n    \"key_1\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"statusCode\": \"401\",\n  \"error\": \"Invalid credentials.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "58d15266-d47f-462f-b327-c61eaa4c7a30",
+          "name": "Validate passport input against OCR",
+          "request": {
+            "name": "Validate passport input against OCR",
+            "description": {
+              "content": "Cross-validates user-entered passport details against front/back OCR results.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "validatePassportInput"
+              ],
+              "host": [
+                "{{api-validatePassportInput-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userInput\": {\n    \"key_0\": 7734.931372735419\n  },\n  \"ocrResult\": {\n    \"key_0\": false\n  },\n  \"ocrResultFront\": {\n    \"key_0\": false\n  },\n  \"ocrResultBack\": {\n    \"key_0\": 8821.13077942613,\n    \"key_1\": false,\n    \"key_2\": 9351,\n    \"key_3\": 9998.969098256048\n  },\n  \"qrResult\": {\n    \"key_0\": 5670.176691278396,\n    \"key_1\": 1156.5901023178415,\n    \"key_2\": \"string\",\n    \"key_3\": 3241.9262974034946\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8dabb9f9-3f8f-436a-8862-9e3e944dce8c",
+              "name": "Per-field validation result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "validatePassportInput"
+                  ],
+                  "host": [
+                    "{{api-validatePassportInput-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userInput\": {\n    \"key_0\": 7029,\n    \"key_1\": 2749.1797991017097,\n    \"key_2\": 9395.959088762353\n  },\n  \"ocrResult\": {\n    \"key_0\": \"string\",\n    \"key_1\": 2753.4605321529516\n  },\n  \"ocrResultFront\": {\n    \"key_0\": \"string\",\n    \"key_1\": 849\n  },\n  \"ocrResultBack\": {\n    \"key_0\": \"string\",\n    \"key_1\": true\n  },\n  \"qrResult\": {\n    \"key_0\": 2983,\n    \"key_1\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"statusCode\": \"200\",\n  \"result\": {\n    \"key_0\": true,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad3e846a-13d4-4a2a-818b-f5fe31f9c2f8",
+              "name": "Invalid or missing appId/appKey credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "validatePassportInput"
+                  ],
+                  "host": [
+                    "{{api-validatePassportInput-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userInput\": {\n    \"key_0\": 7029,\n    \"key_1\": 2749.1797991017097,\n    \"key_2\": 9395.959088762353\n  },\n  \"ocrResult\": {\n    \"key_0\": \"string\",\n    \"key_1\": 2753.4605321529516\n  },\n  \"ocrResultFront\": {\n    \"key_0\": \"string\",\n    \"key_1\": 849\n  },\n  \"ocrResultBack\": {\n    \"key_0\": \"string\",\n    \"key_1\": true\n  },\n  \"qrResult\": {\n    \"key_0\": 2983,\n    \"key_1\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"statusCode\": \"401\",\n  \"error\": \"Invalid credentials.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e0014ba5-5f34-4e8a-b8fb-fbd1bc377de6",
+          "name": "Validate Voter ID input against OCR",
+          "request": {
+            "name": "Validate Voter ID input against OCR",
+            "description": {
+              "content": "Cross-validates user-entered Voter ID details against front/back OCR results.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "validateVoterIdInput"
+              ],
+              "host": [
+                "{{api-validateVoterIdInput-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userInput\": {\n    \"key_0\": 7734.931372735419\n  },\n  \"ocrResult\": {\n    \"key_0\": false\n  },\n  \"ocrResultFront\": {\n    \"key_0\": false\n  },\n  \"ocrResultBack\": {\n    \"key_0\": 8821.13077942613,\n    \"key_1\": false,\n    \"key_2\": 9351,\n    \"key_3\": 9998.969098256048\n  },\n  \"qrResult\": {\n    \"key_0\": 5670.176691278396,\n    \"key_1\": 1156.5901023178415,\n    \"key_2\": \"string\",\n    \"key_3\": 3241.9262974034946\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f61a8161-65f6-4f9b-b1c5-2d1f6d0aa220",
+              "name": "Per-field validation result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "validateVoterIdInput"
+                  ],
+                  "host": [
+                    "{{api-validateVoterIdInput-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userInput\": {\n    \"key_0\": 7029,\n    \"key_1\": 2749.1797991017097,\n    \"key_2\": 9395.959088762353\n  },\n  \"ocrResult\": {\n    \"key_0\": \"string\",\n    \"key_1\": 2753.4605321529516\n  },\n  \"ocrResultFront\": {\n    \"key_0\": \"string\",\n    \"key_1\": 849\n  },\n  \"ocrResultBack\": {\n    \"key_0\": \"string\",\n    \"key_1\": true\n  },\n  \"qrResult\": {\n    \"key_0\": 2983,\n    \"key_1\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"statusCode\": \"200\",\n  \"result\": {\n    \"key_0\": true,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eef732f2-b943-4357-aeef-03b8fc97d073",
+              "name": "Invalid or missing appId/appKey credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "validateVoterIdInput"
+                  ],
+                  "host": [
+                    "{{api-validateVoterIdInput-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userInput\": {\n    \"key_0\": 7029,\n    \"key_1\": 2749.1797991017097,\n    \"key_2\": 9395.959088762353\n  },\n  \"ocrResult\": {\n    \"key_0\": \"string\",\n    \"key_1\": 2753.4605321529516\n  },\n  \"ocrResultFront\": {\n    \"key_0\": \"string\",\n    \"key_1\": 849\n  },\n  \"ocrResultBack\": {\n    \"key_0\": \"string\",\n    \"key_1\": true\n  },\n  \"qrResult\": {\n    \"key_0\": 2983,\n    \"key_1\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"statusCode\": \"401\",\n  \"error\": \"Invalid credentials.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ind-verify.hyperverge.co",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://ind-verify.hyperverge.co",
+      "key": "api-validatePANInput-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://ind-verify.hyperverge.co",
+      "key": "api-validateAadhaarInput-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://ind-verify.hyperverge.co",
+      "key": "api-validatePassportInput-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://ind-verify.hyperverge.co",
+      "key": "api-validateVoterIdInput-Url"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "appId"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "30f21b4d-3ec5-4225-93a0-4064f680421e",
+    "name": "HyperVerge Identity Verification Database Verification Input Validation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "HyperVerge is an AI-based identity verification and customer onboarding platform. This document models HyperVerge's documented public REST surface for India, drawn from HyperVerge's official REST-API documentation repositories on GitHub. The surface spans three region hosts:\n\n\n  * `https://ind-docs.hyperverge.co/v2.0` - KYC document OCR / extraction.\n\n  * `https://ind-verify.hyperverge.co` - central database verification,\n    input validation, and field matching.\n\n  * `https://ind-faceid.hyperverge.co` - face match.\n\n\nAll requests authenticate with an `appId` and `appKey` pair issued by the HyperVerge team (headers are lowercase `appid`/`appkey` on the Face Match host). Credentials are provided after enterprise onboarding. Region hosts exist for other geographies (for example `apac.faceid.hyperverge.co` for Face Match in APAC); only the India hosts are modeled here.\n\nScope note: endpoint paths, methods, and auth are grounded in HyperVerge's published REST documentation. Request/response schemas are modeled representatively (multipart form-data and JSON bodies) rather than copied field-for-field, and are flagged where they are approximate. Liveness detection is delivered via HyperVerge's SDKs/Workflow and is not modeled as a REST operation here because a standalone public REST endpoint was not confirmed at review time.\n\nContact Support:\n Name: HyperVerge",
+      "type": "text/plain"
+    }
+  }
+}

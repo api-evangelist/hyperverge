@@ -1,0 +1,112 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "HyperVerge Identity Verification Database Verification API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "appId",
+      "value": "{{appId}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Database Verification",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Connection health check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ind-verify.hyperverge.co/api"
+          },
+          "docs": "Returns the plain-text string \"Aok\" to confirm connectivity."
+        },
+        {
+          "info": {
+            "name": "Verify PAN against central database",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-verify.hyperverge.co/api/verifyPAN",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Verifies a PAN number against name and date of birth."
+        },
+        {
+          "info": {
+            "name": "Get registered name from PAN",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-verify.hyperverge.co/api/getNameFromPAN",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the registered holder name for a PAN number."
+        },
+        {
+          "info": {
+            "name": "Verify Driving License",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-verify.hyperverge.co/api/checkDL",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Verifies and extracts driving-license data by DL number and date of birth."
+        },
+        {
+          "info": {
+            "name": "Verify Voter ID (EPIC)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-verify.hyperverge.co/api/checkVoterId",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Extracts and verifies Voter ID information by EPIC number."
+        },
+        {
+          "info": {
+            "name": "Verify bank account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-verify.hyperverge.co/api/checkBankAccount",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Verifies bank account details by IFSC and account number."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

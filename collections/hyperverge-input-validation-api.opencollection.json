@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "HyperVerge Identity Verification Database Verification Input Validation API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "appId",
+      "value": "{{appId}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Input Validation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validate PAN input against OCR",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-verify.hyperverge.co/api/validatePANInput",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cross-validates user-entered PAN details against the OCR extraction result and returns per-field match flags."
+        },
+        {
+          "info": {
+            "name": "Validate Aadhaar input against OCR/QR",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-verify.hyperverge.co/api/validateAadhaarInput",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cross-validates user-entered Aadhaar details (or QR-extracted data) against front/back OCR results."
+        },
+        {
+          "info": {
+            "name": "Validate passport input against OCR",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-verify.hyperverge.co/api/validatePassportInput",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cross-validates user-entered passport details against front/back OCR results."
+        },
+        {
+          "info": {
+            "name": "Validate Voter ID input against OCR",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-verify.hyperverge.co/api/validateVoterIdInput",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cross-validates user-entered Voter ID details against front/back OCR results."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

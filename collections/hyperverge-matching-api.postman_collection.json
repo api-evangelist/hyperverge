@@ -1,0 +1,207 @@
+{
+  "item": [
+    {
+      "id": "c28a05ad-40d0-4088-8704-28c9d5a48d29",
+      "name": "Matching",
+      "description": {
+        "content": "Fuzzy and direct field matching.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "35b7220b-9cdf-4b5c-912d-8fb3b1322efe",
+          "name": "Match field pairs",
+          "request": {
+            "name": "Match field pairs",
+            "description": {
+              "content": "Compares two values across supported fields. Fuzzy matching is applied to name and address; direct matching to fields such as dob, pan_no, aadhaar, passport_num, voterid, phone, gender, and others. Returns a per-field result plus an overall `all` flag.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "matchFields"
+              ],
+              "host": [
+                "{{api-matchFields-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": {\n    \"value1\": \"<string>\",\n    \"value2\": \"<string>\"\n  },\n  \"key_1\": {\n    \"value1\": \"<string>\",\n    \"value2\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b33604bb-fdf3-4b09-bd0c-7bc093795034",
+              "name": "Per-field match result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "matchFields"
+                  ],
+                  "host": [
+                    "{{api-matchFields-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": {\n    \"value1\": \"Jane Doe\",\n    \"value2\": \"Jane A Doe\"\n  },\n  \"dob\": {\n    \"value1\": \"01/01/1990\",\n    \"value2\": \"01/01/1990\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"statusCode\": \"200\",\n  \"result\": {\n    \"key_0\": false,\n    \"key_1\": 1260.5448447078804\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b12d0c5-b2c2-4ad3-9ce9-9a58e5426021",
+              "name": "Invalid or missing appId/appKey credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "matchFields"
+                  ],
+                  "host": [
+                    "{{api-matchFields-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": {\n    \"value1\": \"Jane Doe\",\n    \"value2\": \"Jane A Doe\"\n  },\n  \"dob\": {\n    \"value1\": \"01/01/1990\",\n    \"value2\": \"01/01/1990\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"statusCode\": \"401\",\n  \"error\": \"Invalid credentials.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ind-verify.hyperverge.co",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://ind-verify.hyperverge.co",
+      "key": "api-matchFields-Url"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "appId"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2c7daf36-0153-4494-a224-bfba14de35f0",
+    "name": "HyperVerge Identity Verification Database Verification Matching API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "HyperVerge is an AI-based identity verification and customer onboarding platform. This document models HyperVerge's documented public REST surface for India, drawn from HyperVerge's official REST-API documentation repositories on GitHub. The surface spans three region hosts:\n\n\n  * `https://ind-docs.hyperverge.co/v2.0` - KYC document OCR / extraction.\n\n  * `https://ind-verify.hyperverge.co` - central database verification,\n    input validation, and field matching.\n\n  * `https://ind-faceid.hyperverge.co` - face match.\n\n\nAll requests authenticate with an `appId` and `appKey` pair issued by the HyperVerge team (headers are lowercase `appid`/`appkey` on the Face Match host). Credentials are provided after enterprise onboarding. Region hosts exist for other geographies (for example `apac.faceid.hyperverge.co` for Face Match in APAC); only the India hosts are modeled here.\n\nScope note: endpoint paths, methods, and auth are grounded in HyperVerge's published REST documentation. Request/response schemas are modeled representatively (multipart form-data and JSON bodies) rather than copied field-for-field, and are flagged where they are approximate. Liveness detection is delivered via HyperVerge's SDKs/Workflow and is not modeled as a REST operation here because a standalone public REST endpoint was not confirmed at review time.\n\nContact Support:\n Name: HyperVerge",
+      "type": "text/plain"
+    }
+  }
+}

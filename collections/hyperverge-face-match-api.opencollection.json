@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "HyperVerge Identity Verification Database Verification Face Match API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "appId",
+      "value": "{{appId}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Face Match",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Face Match health check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ind-verify.hyperverge.co/v1/photo/verifyPair"
+          },
+          "docs": "Returns the plain-text string \"Hello!\" to confirm connectivity."
+        },
+        {
+          "info": {
+            "name": "Verify a face pair",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ind-verify.hyperverge.co/v1/photo/verifyPair",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "selfie",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "id",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "selfie2",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "allowMultipleFaces",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "enableDashboard",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Determines whether two face images belong to the same person. Supply either a selfie + id pair or a selfie + selfie2 pair. Uses lowercase `appid`/`appkey` headers on this host."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

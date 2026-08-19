@@ -1,0 +1,922 @@
+{
+  "item": [
+    {
+      "id": "577cdf65-7970-4ec6-8f13-e271f9f25aa7",
+      "name": "Database Verification",
+      "description": {
+        "content": "Central/government database verification for Indian documents.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9ad782d2-3193-488f-bb5c-be2f6249d0bd",
+          "name": "Connection health check",
+          "request": {
+            "name": "Connection health check",
+            "description": {
+              "content": "Returns the plain-text string \"Aok\" to confirm connectivity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api"
+              ],
+              "host": [
+                "{{api-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "600c42bf-623a-4b15-ad87-2506ed3f811e",
+              "name": "Plain-text \"Aok\".",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api"
+                  ],
+                  "host": [
+                    "{{api-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Aok",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "74f72646-8caa-47ba-b935-e04dad78b568",
+          "name": "Verify PAN against central database",
+          "request": {
+            "name": "Verify PAN against central database",
+            "description": {
+              "content": "Verifies a PAN number against name and date of birth.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "verifyPAN"
+              ],
+              "host": [
+                "{{api-verifyPAN-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pan\": \"<string>\",\n  \"name\": \"<string>\",\n  \"dob\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3f407ddf-15e3-4463-9d05-4f20b3151319",
+              "name": "Verification result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "verifyPAN"
+                  ],
+                  "host": [
+                    "{{api-verifyPAN-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pan\": \"ABCDE1234F\",\n  \"name\": \"<string>\",\n  \"dob\": \"01/01/1990\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"statusCode\": \"200\",\n  \"result\": {\n    \"key_0\": 7386.418242015541,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a50f3ecc-bc57-4abe-accc-3b4904c4955f",
+              "name": "Invalid or missing appId/appKey credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "verifyPAN"
+                  ],
+                  "host": [
+                    "{{api-verifyPAN-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pan\": \"ABCDE1234F\",\n  \"name\": \"<string>\",\n  \"dob\": \"01/01/1990\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"statusCode\": \"401\",\n  \"error\": \"Invalid credentials.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e0790030-4867-48cc-b5e9-7a846176447d",
+          "name": "Get registered name from PAN",
+          "request": {
+            "name": "Get registered name from PAN",
+            "description": {
+              "content": "Returns the registered holder name for a PAN number.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "getNameFromPAN"
+              ],
+              "host": [
+                "{{api-getNameFromPAN-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pan\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4117f34e-e58d-40d4-9c50-7e2c512c0b0e",
+              "name": "Verification result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "getNameFromPAN"
+                  ],
+                  "host": [
+                    "{{api-getNameFromPAN-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pan\": \"ABCDE1234F\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"statusCode\": \"200\",\n  \"result\": {\n    \"key_0\": 7386.418242015541,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22e3427c-1243-4495-b498-20a020aa0e40",
+              "name": "Invalid or missing appId/appKey credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "getNameFromPAN"
+                  ],
+                  "host": [
+                    "{{api-getNameFromPAN-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pan\": \"ABCDE1234F\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"statusCode\": \"401\",\n  \"error\": \"Invalid credentials.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d3399f3-6358-4927-bfb3-c82b79bad3be",
+          "name": "Verify Driving License",
+          "request": {
+            "name": "Verify Driving License",
+            "description": {
+              "content": "Verifies and extracts driving-license data by DL number and date of birth.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "checkDL"
+              ],
+              "host": [
+                "{{api-checkDL-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dlNumber\": \"<string>\",\n  \"dob\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a5ec5c46-4a3d-4ece-846c-1d7d6738e66b",
+              "name": "Verification result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "checkDL"
+                  ],
+                  "host": [
+                    "{{api-checkDL-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dlNumber\": \"<string>\",\n  \"dob\": \"01-01-1990\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"statusCode\": \"200\",\n  \"result\": {\n    \"key_0\": 7386.418242015541,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c64ee89f-18dd-4216-b867-bda5c33dfcca",
+              "name": "Invalid or missing appId/appKey credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "checkDL"
+                  ],
+                  "host": [
+                    "{{api-checkDL-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dlNumber\": \"<string>\",\n  \"dob\": \"01-01-1990\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"statusCode\": \"401\",\n  \"error\": \"Invalid credentials.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "33797da3-52f4-460c-98c2-db0eac341ceb",
+          "name": "Verify Voter ID (EPIC)",
+          "request": {
+            "name": "Verify Voter ID (EPIC)",
+            "description": {
+              "content": "Extracts and verifies Voter ID information by EPIC number.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "checkVoterId"
+              ],
+              "host": [
+                "{{api-checkVoterId-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"epicNumber\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "60cb3900-c295-462c-8617-f61d185b7f20",
+              "name": "Verification result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "checkVoterId"
+                  ],
+                  "host": [
+                    "{{api-checkVoterId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"epicNumber\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"statusCode\": \"200\",\n  \"result\": {\n    \"key_0\": 7386.418242015541,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3c898a7-d71e-4e17-a69b-6666b75901af",
+              "name": "Invalid or missing appId/appKey credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "checkVoterId"
+                  ],
+                  "host": [
+                    "{{api-checkVoterId-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"epicNumber\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"statusCode\": \"401\",\n  \"error\": \"Invalid credentials.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec300bda-57bb-4542-be5c-f6bfd835c771",
+          "name": "Verify bank account",
+          "request": {
+            "name": "Verify bank account",
+            "description": {
+              "content": "Verifies bank account details by IFSC and account number.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "checkBankAccount"
+              ],
+              "host": [
+                "{{api-checkBankAccount-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ifsc\": \"<string>\",\n  \"accountNumber\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1e89307f-64e2-4bf1-86b5-ea87f1a270db",
+              "name": "Verification result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "checkBankAccount"
+                  ],
+                  "host": [
+                    "{{api-checkBankAccount-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ifsc\": \"<string>\",\n  \"accountNumber\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"statusCode\": \"200\",\n  \"result\": {\n    \"key_0\": 7386.418242015541,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c850371-edce-4621-9af3-a63a1502b488",
+              "name": "Invalid or missing appId/appKey credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "checkBankAccount"
+                  ],
+                  "host": [
+                    "{{api-checkBankAccount-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ifsc\": \"<string>\",\n  \"accountNumber\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"statusCode\": \"401\",\n  \"error\": \"Invalid credentials.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ind-verify.hyperverge.co",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://ind-verify.hyperverge.co",
+      "key": "api-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://ind-verify.hyperverge.co",
+      "key": "api-verifyPAN-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://ind-verify.hyperverge.co",
+      "key": "api-getNameFromPAN-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://ind-verify.hyperverge.co",
+      "key": "api-checkDL-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://ind-verify.hyperverge.co",
+      "key": "api-checkVoterId-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://ind-verify.hyperverge.co",
+      "key": "api-checkBankAccount-Url"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "appId"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c9f2398b-be49-4b66-b0bc-707b724a379d",
+    "name": "HyperVerge Identity Verification Database Verification API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "HyperVerge is an AI-based identity verification and customer onboarding platform. This document models HyperVerge's documented public REST surface for India, drawn from HyperVerge's official REST-API documentation repositories on GitHub. The surface spans three region hosts:\n\n\n  * `https://ind-docs.hyperverge.co/v2.0` - KYC document OCR / extraction.\n\n  * `https://ind-verify.hyperverge.co` - central database verification,\n    input validation, and field matching.\n\n  * `https://ind-faceid.hyperverge.co` - face match.\n\n\nAll requests authenticate with an `appId` and `appKey` pair issued by the HyperVerge team (headers are lowercase `appid`/`appkey` on the Face Match host). Credentials are provided after enterprise onboarding. Region hosts exist for other geographies (for example `apac.faceid.hyperverge.co` for Face Match in APAC); only the India hosts are modeled here.\n\nScope note: endpoint paths, methods, and auth are grounded in HyperVerge's published REST documentation. Request/response schemas are modeled representatively (multipart form-data and JSON bodies) rather than copied field-for-field, and are flagged where they are approximate. Liveness detection is delivered via HyperVerge's SDKs/Workflow and is not modeled as a REST operation here because a standalone public REST endpoint was not confirmed at review time.\n\nContact Support:\n Name: HyperVerge",
+      "type": "text/plain"
+    }
+  }
+}

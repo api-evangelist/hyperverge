@@ -1,0 +1,1482 @@
+{
+  "item": [
+    {
+      "id": "4f28bc71-8ee0-4ee6-8b81-96450c65d2fd",
+      "name": "KYC OCR",
+      "description": {
+        "content": "Document OCR and KYC field extraction for Indian identity documents.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5fc1338c-5ec0-4c5f-9d38-d81879b44380",
+          "name": "Extract KYC fields (auto-detect document)",
+          "request": {
+            "name": "Extract KYC fields (auto-detect document)",
+            "description": {
+              "content": "Auto-detects the supported Indian document type in the supplied image, PDF, or URL and extracts the relevant KYC fields.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "readKYC"
+              ],
+              "host": [
+                "{{readKYC-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "description": "Document image (JPEG, PNG, or TIFF)."
+                },
+                {
+                  "key": "pdf",
+                  "type": "file",
+                  "description": "Document as a PDF."
+                },
+                {
+                  "key": "url",
+                  "value": "<uri>",
+                  "type": "text",
+                  "description": "Publicly accessible URL to the document."
+                },
+                {
+                  "key": "qualityCheck",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Detect black/white or low-quality documents. (This can only be one of yes,no)"
+                },
+                {
+                  "key": "faceCheck",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Verify a face is present on the document. (This can only be one of yes,no)"
+                },
+                {
+                  "key": "outputImageUrl",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Return a cropped/aligned image URL. (This can only be one of yes,no)"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3b52f1b7-bb12-4e86-8145-28af90ff2866",
+              "name": "Extraction result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "readKYC"
+                  ],
+                  "host": [
+                    "{{readKYC-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Document image (JPEG, PNG, or TIFF).",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Document as a PDF.",
+                        "type": "text/plain"
+                      },
+                      "key": "pdf",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Publicly accessible URL to the document.",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "<uri>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Detect black/white or low-quality documents. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "qualityCheck",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Verify a face is present on the document. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "faceCheck",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Return a cropped/aligned image URL. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "outputImageUrl",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"statusCode\": \"200\",\n  \"result\": {\n    \"key_0\": 8409\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "091b7395-2463-4325-a2d6-94bf2c57738d",
+              "name": "Invalid or missing appId/appKey credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "readKYC"
+                  ],
+                  "host": [
+                    "{{readKYC-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Document image (JPEG, PNG, or TIFF).",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Document as a PDF.",
+                        "type": "text/plain"
+                      },
+                      "key": "pdf",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Publicly accessible URL to the document.",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "<uri>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Detect black/white or low-quality documents. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "qualityCheck",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Verify a face is present on the document. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "faceCheck",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Return a cropped/aligned image URL. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "outputImageUrl",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"statusCode\": \"401\",\n  \"error\": \"Invalid credentials.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a0bc2229-6d5c-4f9e-9032-3463061ec53c",
+          "name": "Extract PAN card fields",
+          "request": {
+            "name": "Extract PAN card fields",
+            "description": {
+              "content": "Extracts fields from an Indian PAN card image, PDF, or URL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "readPAN"
+              ],
+              "host": [
+                "{{readPAN-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "value": "<binary>",
+                  "type": "text",
+                  "description": "Document image (JPEG, PNG, or TIFF)."
+                },
+                {
+                  "key": "pdf",
+                  "value": "<binary>",
+                  "type": "text",
+                  "description": "Document as a PDF."
+                },
+                {
+                  "key": "url",
+                  "value": "<uri>",
+                  "type": "text",
+                  "description": "Publicly accessible URL to the document."
+                },
+                {
+                  "key": "qualityCheck",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Detect black/white or low-quality documents. (This can only be one of yes,no)"
+                },
+                {
+                  "key": "faceCheck",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Verify a face is present on the document. (This can only be one of yes,no)"
+                },
+                {
+                  "key": "outputImageUrl",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Return a cropped/aligned image URL. (This can only be one of yes,no)"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "35e13fb4-d7cd-483b-a7e4-f50def47863d",
+              "name": "Extraction result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "readPAN"
+                  ],
+                  "host": [
+                    "{{readPAN-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Document image (JPEG, PNG, or TIFF).",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Document as a PDF.",
+                        "type": "text/plain"
+                      },
+                      "key": "pdf",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Publicly accessible URL to the document.",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "<uri>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Detect black/white or low-quality documents. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "qualityCheck",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Verify a face is present on the document. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "faceCheck",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Return a cropped/aligned image URL. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "outputImageUrl",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"statusCode\": \"200\",\n  \"result\": {\n    \"key_0\": 8409\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d6ae8f9-c0dc-4fa4-9587-ba8e0bb7f54a",
+              "name": "Invalid or missing appId/appKey credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "readPAN"
+                  ],
+                  "host": [
+                    "{{readPAN-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Document image (JPEG, PNG, or TIFF).",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Document as a PDF.",
+                        "type": "text/plain"
+                      },
+                      "key": "pdf",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Publicly accessible URL to the document.",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "<uri>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Detect black/white or low-quality documents. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "qualityCheck",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Verify a face is present on the document. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "faceCheck",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Return a cropped/aligned image URL. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "outputImageUrl",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"statusCode\": \"401\",\n  \"error\": \"Invalid credentials.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4470baeb-3e4e-4fca-a113-44476d775458",
+          "name": "Extract Aadhaar card fields",
+          "request": {
+            "name": "Extract Aadhaar card fields",
+            "description": {
+              "content": "Extracts fields from an Aadhaar card image, PDF, or URL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "readAadhaar"
+              ],
+              "host": [
+                "{{readAadhaar-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "value": "<binary>",
+                  "type": "text",
+                  "description": "Document image (JPEG, PNG, or TIFF)."
+                },
+                {
+                  "key": "pdf",
+                  "value": "<binary>",
+                  "type": "text",
+                  "description": "Document as a PDF."
+                },
+                {
+                  "key": "url",
+                  "value": "<uri>",
+                  "type": "text",
+                  "description": "Publicly accessible URL to the document."
+                },
+                {
+                  "key": "qualityCheck",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Detect black/white or low-quality documents. (This can only be one of yes,no)"
+                },
+                {
+                  "key": "faceCheck",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Verify a face is present on the document. (This can only be one of yes,no)"
+                },
+                {
+                  "key": "outputImageUrl",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Return a cropped/aligned image URL. (This can only be one of yes,no)"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "88b36506-3ea9-4d69-8b66-3b74ee5595c0",
+              "name": "Extraction result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "readAadhaar"
+                  ],
+                  "host": [
+                    "{{readAadhaar-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Document image (JPEG, PNG, or TIFF).",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Document as a PDF.",
+                        "type": "text/plain"
+                      },
+                      "key": "pdf",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Publicly accessible URL to the document.",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "<uri>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Detect black/white or low-quality documents. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "qualityCheck",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Verify a face is present on the document. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "faceCheck",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Return a cropped/aligned image URL. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "outputImageUrl",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"statusCode\": \"200\",\n  \"result\": {\n    \"key_0\": 8409\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "004a778f-ce9f-49a6-8e6d-2436fa0eb6f7",
+              "name": "Invalid or missing appId/appKey credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "readAadhaar"
+                  ],
+                  "host": [
+                    "{{readAadhaar-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Document image (JPEG, PNG, or TIFF).",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Document as a PDF.",
+                        "type": "text/plain"
+                      },
+                      "key": "pdf",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Publicly accessible URL to the document.",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "<uri>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Detect black/white or low-quality documents. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "qualityCheck",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Verify a face is present on the document. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "faceCheck",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Return a cropped/aligned image URL. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "outputImageUrl",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"statusCode\": \"401\",\n  \"error\": \"Invalid credentials.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6eb79ce2-edd0-4d30-9e39-387c5d13bc42",
+          "name": "Extract Indian passport fields",
+          "request": {
+            "name": "Extract Indian passport fields",
+            "description": {
+              "content": "Extracts fields from an Indian passport image, PDF, or URL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "readPassport"
+              ],
+              "host": [
+                "{{readPassport-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "value": "<binary>",
+                  "type": "text",
+                  "description": "Document image (JPEG, PNG, or TIFF)."
+                },
+                {
+                  "key": "pdf",
+                  "value": "<binary>",
+                  "type": "text",
+                  "description": "Document as a PDF."
+                },
+                {
+                  "key": "url",
+                  "value": "<uri>",
+                  "type": "text",
+                  "description": "Publicly accessible URL to the document."
+                },
+                {
+                  "key": "qualityCheck",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Detect black/white or low-quality documents. (This can only be one of yes,no)"
+                },
+                {
+                  "key": "faceCheck",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Verify a face is present on the document. (This can only be one of yes,no)"
+                },
+                {
+                  "key": "outputImageUrl",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Return a cropped/aligned image URL. (This can only be one of yes,no)"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "dccbbbb3-fbb9-4327-9338-fac8ed3fe790",
+              "name": "Extraction result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "readPassport"
+                  ],
+                  "host": [
+                    "{{readPassport-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Document image (JPEG, PNG, or TIFF).",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Document as a PDF.",
+                        "type": "text/plain"
+                      },
+                      "key": "pdf",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Publicly accessible URL to the document.",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "<uri>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Detect black/white or low-quality documents. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "qualityCheck",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Verify a face is present on the document. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "faceCheck",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Return a cropped/aligned image URL. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "outputImageUrl",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"statusCode\": \"200\",\n  \"result\": {\n    \"key_0\": 8409\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8253704b-f95a-4671-bec5-c641b36835ef",
+              "name": "Invalid or missing appId/appKey credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "readPassport"
+                  ],
+                  "host": [
+                    "{{readPassport-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Document image (JPEG, PNG, or TIFF).",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Document as a PDF.",
+                        "type": "text/plain"
+                      },
+                      "key": "pdf",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Publicly accessible URL to the document.",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "<uri>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Detect black/white or low-quality documents. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "qualityCheck",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Verify a face is present on the document. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "faceCheck",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Return a cropped/aligned image URL. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "outputImageUrl",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"statusCode\": \"401\",\n  \"error\": \"Invalid credentials.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b2446902-a8d1-4aa8-aaea-733c54ccf261",
+          "name": "Extract Voter ID fields",
+          "request": {
+            "name": "Extract Voter ID fields",
+            "description": {
+              "content": "Extracts fields from a Voter ID (EPIC) card image, PDF, or URL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "readVoterID"
+              ],
+              "host": [
+                "{{readVoterID-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "value": "<binary>",
+                  "type": "text",
+                  "description": "Document image (JPEG, PNG, or TIFF)."
+                },
+                {
+                  "key": "pdf",
+                  "value": "<binary>",
+                  "type": "text",
+                  "description": "Document as a PDF."
+                },
+                {
+                  "key": "url",
+                  "value": "<uri>",
+                  "type": "text",
+                  "description": "Publicly accessible URL to the document."
+                },
+                {
+                  "key": "qualityCheck",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Detect black/white or low-quality documents. (This can only be one of yes,no)"
+                },
+                {
+                  "key": "faceCheck",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Verify a face is present on the document. (This can only be one of yes,no)"
+                },
+                {
+                  "key": "outputImageUrl",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "Return a cropped/aligned image URL. (This can only be one of yes,no)"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0b791f9b-1ad3-4b2d-a754-34b56919e8a9",
+              "name": "Extraction result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "readVoterID"
+                  ],
+                  "host": [
+                    "{{readVoterID-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Document image (JPEG, PNG, or TIFF).",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Document as a PDF.",
+                        "type": "text/plain"
+                      },
+                      "key": "pdf",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Publicly accessible URL to the document.",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "<uri>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Detect black/white or low-quality documents. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "qualityCheck",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Verify a face is present on the document. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "faceCheck",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Return a cropped/aligned image URL. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "outputImageUrl",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"statusCode\": \"200\",\n  \"result\": {\n    \"key_0\": 8409\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9eb249b-606e-43ec-978c-9651c96172c0",
+              "name": "Invalid or missing appId/appKey credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "readVoterID"
+                  ],
+                  "host": [
+                    "{{readVoterID-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "appId",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Document image (JPEG, PNG, or TIFF).",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Document as a PDF.",
+                        "type": "text/plain"
+                      },
+                      "key": "pdf",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Publicly accessible URL to the document.",
+                        "type": "text/plain"
+                      },
+                      "key": "url",
+                      "value": "<uri>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Detect black/white or low-quality documents. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "qualityCheck",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Verify a face is present on the document. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "faceCheck",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Return a cropped/aligned image URL. (This can only be one of yes,no)",
+                        "type": "text/plain"
+                      },
+                      "key": "outputImageUrl",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"failure\",\n  \"statusCode\": \"401\",\n  \"error\": \"Invalid credentials.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ind-verify.hyperverge.co",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://ind-docs.hyperverge.co/v2.0",
+      "key": "readKYC-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://ind-docs.hyperverge.co/v2.0",
+      "key": "readPAN-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://ind-docs.hyperverge.co/v2.0",
+      "key": "readAadhaar-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://ind-docs.hyperverge.co/v2.0",
+      "key": "readPassport-Url"
+    },
+    {
+      "type": "string",
+      "value": "https://ind-docs.hyperverge.co/v2.0",
+      "key": "readVoterID-Url"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "appId"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a3039565-3472-41d4-bf2e-f1d6353d4961",
+    "name": "HyperVerge Identity Verification Database Verification KYC OCR API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "HyperVerge is an AI-based identity verification and customer onboarding platform. This document models HyperVerge's documented public REST surface for India, drawn from HyperVerge's official REST-API documentation repositories on GitHub. The surface spans three region hosts:\n\n\n  * `https://ind-docs.hyperverge.co/v2.0` - KYC document OCR / extraction.\n\n  * `https://ind-verify.hyperverge.co` - central database verification,\n    input validation, and field matching.\n\n  * `https://ind-faceid.hyperverge.co` - face match.\n\n\nAll requests authenticate with an `appId` and `appKey` pair issued by the HyperVerge team (headers are lowercase `appid`/`appkey` on the Face Match host). Credentials are provided after enterprise onboarding. Region hosts exist for other geographies (for example `apac.faceid.hyperverge.co` for Face Match in APAC); only the India hosts are modeled here.\n\nScope note: endpoint paths, methods, and auth are grounded in HyperVerge's published REST documentation. Request/response schemas are modeled representatively (multipart form-data and JSON bodies) rather than copied field-for-field, and are flagged where they are approximate. Liveness detection is delivered via HyperVerge's SDKs/Workflow and is not modeled as a REST operation here because a standalone public REST endpoint was not confirmed at review time.\n\nContact Support:\n Name: HyperVerge",
+      "type": "text/plain"
+    }
+  }
+}
