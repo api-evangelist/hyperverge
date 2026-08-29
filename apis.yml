@@ -11,6 +11,18 @@ description: HyperVerge is an AI-based identity verification and customer onboar
   region-hosted (India `ind-*`, plus APAC/other regions) and authenticated with an
   appId and appKey issued by HyperVerge; enterprise onboarding is required to obtain
   credentials.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve
