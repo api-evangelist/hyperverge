@@ -1,11 +1,7 @@
 {
   "provider": "hyperverge",
   "sources": [
-    "hyperverge-database-verification-api-openapi.yml",
-    "hyperverge-face-match-api-openapi.yml",
-    "hyperverge-input-validation-api-openapi.yml",
-    "hyperverge-kyc-ocr-api-openapi.yml",
-    "hyperverge-matching-api-openapi.yml"
+    "_original/hyperverge-openapi.yml"
   ],
   "outputs": [
     "hyperverge-database-verification-api-openapi.yml",
@@ -17,6 +13,16 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "hyperverge-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "hyperverge-database-verification-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "hyperverge-face-match-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "hyperverge-input-validation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "hyperverge-kyc-ocr-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "hyperverge-matching-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
