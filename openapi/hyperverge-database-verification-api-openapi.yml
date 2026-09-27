@@ -210,6 +210,18 @@ components:
           type: string
           description: Date of birth in DD/MM/YYYY format.
           example: 01/01/1990
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+          example: failure
+        statusCode:
+          type: string
+          example: '401'
+        error:
+          type: string
+          example: Invalid credentials.
     VerificationResult:
       type: object
       description: Representative database-verification response (modeled).
@@ -223,18 +235,6 @@ components:
         result:
           type: object
           additionalProperties: true
-    Error:
-      type: object
-      properties:
-        status:
-          type: string
-          example: failure
-        statusCode:
-          type: string
-          example: '401'
-        error:
-          type: string
-          example: Invalid credentials.
   responses:
     Unauthorized:
       description: Invalid or missing appId/appKey credentials.
