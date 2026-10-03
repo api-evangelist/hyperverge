@@ -156,18 +156,6 @@ components:
           type: object
           additionalProperties: true
           description: Extracted document fields (fields vary by document type).
-    Error:
-      type: object
-      properties:
-        status:
-          type: string
-          example: failure
-        statusCode:
-          type: string
-          example: '401'
-        error:
-          type: string
-          example: Invalid credentials.
     OcrDocumentInput:
       type: object
       description: Supply exactly one of image, pdf, or url. Modeled representatively from HyperVerge KYC docs.
@@ -202,6 +190,18 @@ components:
           - 'yes'
           - 'no'
           description: Return a cropped/aligned image URL.
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+          example: failure
+        statusCode:
+          type: string
+          example: '401'
+        error:
+          type: string
+          example: Invalid credentials.
   responses:
     Unauthorized:
       description: Invalid or missing appId/appKey credentials.

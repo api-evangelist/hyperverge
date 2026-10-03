@@ -193,6 +193,19 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    VerificationResult:
+      type: object
+      description: Representative database-verification response (modeled).
+      properties:
+        status:
+          type: string
+          example: success
+        statusCode:
+          type: string
+          example: '200'
+        result:
+          type: object
+          additionalProperties: true
     VerifyPanInput:
       type: object
       required:
@@ -222,19 +235,6 @@ components:
         error:
           type: string
           example: Invalid credentials.
-    VerificationResult:
-      type: object
-      description: Representative database-verification response (modeled).
-      properties:
-        status:
-          type: string
-          example: success
-        statusCode:
-          type: string
-          example: '200'
-        result:
-          type: object
-          additionalProperties: true
   responses:
     Unauthorized:
       description: Invalid or missing appId/appKey credentials.
