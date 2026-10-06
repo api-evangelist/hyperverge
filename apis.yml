@@ -61,7 +61,7 @@ tags_raw:
 - Fraud Prevention
 - AI
 created: '2026-07-12'
-modified: '2026-07-12'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: hyperverge:hyperverge-liveness-api
@@ -252,6 +252,10 @@ apis:
   - type: APIReference
     url: https://github.com/hyperverge/face-match-india-rest-api/blob/master/README.md
 common:
+- url: https://hyperverge.co/news/
+  type: Blog
+- url: https://hyperverge.co/news/feed/
+  type: BlogRSS
 - type: AgenticAccess
   url: agentic-access/hyperverge-agentic-access.yml
 - type: DomainSecurity
