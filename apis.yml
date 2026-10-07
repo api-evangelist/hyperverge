@@ -252,6 +252,8 @@ apis:
   - type: APIReference
     url: https://github.com/hyperverge/face-match-india-rest-api/blob/master/README.md
 common:
+- type: Pricing
+  url: https://hyperverge.co/pricing/
 - url: https://hyperverge.co/news/
   type: Blog
 - url: https://hyperverge.co/news/feed/
