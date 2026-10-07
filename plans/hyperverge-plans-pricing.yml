@@ -14,6 +14,7 @@ delivery:
   delivery: managed
   method: page
   read: '2026-10-07'
+  managed_tier: Grow
 published: false
 note: No numeric prices shown; tiers are quote-based. FAQ states "We follow volume based pricing tiers.
   As your volumes increase, your unit price incurred will reduce."
