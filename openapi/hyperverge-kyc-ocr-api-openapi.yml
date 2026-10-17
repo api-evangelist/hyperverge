@@ -141,7 +141,28 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Invalid or missing appId/appKey credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    OcrResult:
+      type: object
+      description: Representative KYC extraction response (modeled).
+      properties:
+        status:
+          type: string
+          example: success
+        statusCode:
+          type: string
+          example: '200'
+        result:
+          type: object
+          additionalProperties: true
+          description: Extracted document fields (fields vary by document type).
     OcrDocumentInput:
       type: object
       description: Supply exactly one of image, pdf, or url. Modeled representatively from HyperVerge KYC docs.
@@ -176,20 +197,6 @@ components:
           - 'yes'
           - 'no'
           description: Return a cropped/aligned image URL.
-    OcrResult:
-      type: object
-      description: Representative KYC extraction response (modeled).
-      properties:
-        status:
-          type: string
-          example: success
-        statusCode:
-          type: string
-          example: '200'
-        result:
-          type: object
-          additionalProperties: true
-          description: Extracted document fields (fields vary by document type).
     Error:
       type: object
       properties:
@@ -202,13 +209,6 @@ components:
         error:
           type: string
           example: Invalid credentials.
-  responses:
-    Unauthorized:
-      description: Invalid or missing appId/appKey credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     appIdKey:
       type: apiKey

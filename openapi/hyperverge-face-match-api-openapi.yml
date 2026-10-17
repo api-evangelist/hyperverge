@@ -82,7 +82,26 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Invalid or missing appId/appKey credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+          example: failure
+        statusCode:
+          type: string
+          example: '401'
+        error:
+          type: string
+          example: Invalid credentials.
     FaceMatchResult:
       type: object
       description: Representative face-match response (modeled).
@@ -105,25 +124,6 @@ components:
                 confidence:
                   type: string
                   description: Match confidence/score.
-    Error:
-      type: object
-      properties:
-        status:
-          type: string
-          example: failure
-        statusCode:
-          type: string
-          example: '401'
-        error:
-          type: string
-          example: Invalid credentials.
-  responses:
-    Unauthorized:
-      description: Invalid or missing appId/appKey credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     appIdKey:
       type: apiKey

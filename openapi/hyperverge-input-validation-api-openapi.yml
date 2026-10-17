@@ -117,7 +117,26 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Invalid or missing appId/appKey credentials.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+          example: failure
+        statusCode:
+          type: string
+          example: '401'
+        error:
+          type: string
+          example: Invalid credentials.
     ValidationResult:
       type: object
       description: Representative per-field match response (modeled).
@@ -132,18 +151,6 @@ components:
           type: object
           additionalProperties: true
           description: Per-field match flags, plus an overall `all` flag on matchFields.
-    Error:
-      type: object
-      properties:
-        status:
-          type: string
-          example: failure
-        statusCode:
-          type: string
-          example: '401'
-        error:
-          type: string
-          example: Invalid credentials.
     ValidateInput:
       type: object
       description: Representative validation body (modeled). Carries user-entered values under `userInput` and the OCR/QR extraction under `ocrResult`, `ocrResultFront`/`ocrResultBack`, or `qrResult` depending on the document.
@@ -163,13 +170,6 @@ components:
         qrResult:
           type: object
           additionalProperties: true
-  responses:
-    Unauthorized:
-      description: Invalid or missing appId/appKey credentials.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     appIdKey:
       type: apiKey
