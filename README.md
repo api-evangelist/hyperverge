@@ -1,4 +1,4 @@
-# HyperVerge (hyperverge)
+# HyperVerge
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,181 +64,128 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-HyperVerge is an AI-based identity verification and customer onboarding platform (India-HQ, global) providing document OCR / KYC extraction, face match, passive liveness, government/central database verification, and field matching. Its REST APIs extract and verify Indian identity documents (PAN, Aadhaar, Passport, Voter ID, Driving License), match a selfie against an ID photo, and validate user input against central databases for onboarding, AML, and fraud prevention.
+HyperVerge is an AI-based identity verification and customer onboarding platform (India-HQ, global) providing document OCR and KYC extraction, face match, passive liveness, government/central database verification, and field matching. Its REST APIs extract and verify Indian identity documents (PAN, Aadhaar, Passport, Voter ID, Driving License), match a selfie against an ID photo, and validate user input against central databases for onboarding, AML, and fraud prevention. APIs are region-hosted (India `ind-*`, plus APAC/other regions) and authenticated with an appId and appKey issued by HyperVerge; enterprise onboarding is required to obtain credentials.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/hyperverge/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/hyperverge/refs/heads/main/apis.yml)
+**Areas:** Identity Verification · KYC · Face Authentication · Liveness · Document Verification · India · AML · Onboarding · Fraud Prevention · Artificial Intelligence
 
-## Access Model (Read First)
+## HyperVerge on APIs.io
 
-HyperVerge's APIs are **enterprise / onboarding-gated**, not self-serve:
+Everything profiled for HyperVerge is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/hyperverge/](https://apis.io/providers/hyperverge/)** — or go straight to one of the APIs or properties below.
 
-- **Authentication:** every request carries an `appId` and `appKey` pair issued by the HyperVerge team after commercial onboarding. On the Face Match host the headers are lowercase `appid` / `appkey`. HyperVerge explicitly warns not to expose these credentials in browser applications. Invalid credentials return HTTP `401`.
-- **Region hosts:** the API is region-hosted. India uses `ind-*` hosts; other geographies have their own (for example `apac.faceid.hyperverge.co` for Face Match in APAC). Only the India hosts are cataloged here:
-  - `https://ind-docs.hyperverge.co/v2.0` — KYC document OCR / extraction (multipart form-data).
-  - `https://ind-verify.hyperverge.co` — database verification, input validation, and matching (JSON).
-  - `https://ind-faceid.hyperverge.co` — face match (multipart form-data).
-- **Pricing:** quote-based. HyperVerge publishes tiers (Start / Grow / Enterprise) but no public per-verification rate; you request a quote sized to your verification volume. See `plans/` and `finops/`.
-- **Liveness:** passive liveness / presentation-attack detection is a core product, but it is delivered through HyperVerge's mobile SDKs and hosted onboarding Workflow rather than a confirmed standalone public REST endpoint — see the note under APIs below.
+### APIs (6)
 
-## Tags
+- [HyperVerge Liveness Detection](https://apis.io/apis/hyperverge/hyperverge-liveness-api/) — Passive liveness / presentation-attack detection from a single selfie, trained on 850M+ liveness checks. Delivered primarily through HyperVerge's mobile…
+- [HyperVerge Database Verification API](https://apis.io/apis/hyperverge/hyperverge-database-verification-api/) — Central/government database verification for Indian documents.
+- [HyperVerge Face Match API](https://apis.io/apis/hyperverge/hyperverge-face-match-api/) — Selfie-to-ID / selfie-to-selfie face comparison.
+- [HyperVerge Input Validation API](https://apis.io/apis/hyperverge/hyperverge-input-validation-api/) — Cross-validation of user input against OCR/QR extraction output.
+- [HyperVerge KYC OCR API](https://apis.io/apis/hyperverge/hyperverge-kyc-ocr-api/) — Document OCR and KYC field extraction for Indian identity documents.
+- [HyperVerge Matching API](https://apis.io/apis/hyperverge/hyperverge-matching-api/) — Fuzzy and direct field matching.
 
-- Identity Verification
-- KYC
-- Face Authentication
-- Liveness
-- Document Verification
-- India
-- AML
-- Onboarding
-- Fraud Prevention
-- AI
+### Published properties
 
-## Timestamps
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- **Created:** 2026-07-12
-- **Modified:** 2026-07-12
+#### Agentic access (1)
 
-## APIs
+Which operations an agent can call, which act, and which need a human in the loop.
 
-### HyperVerge KYC OCR API
+- [Hyperverge Agentic Access](https://apis.io/agentic-access/hyperverge/hyperverge-agentic-access/)
 
-Image/PDF OCR and KYC extraction for Indian identity documents. `readKYC` auto-detects the document type; dedicated endpoints extract PAN, Aadhaar, Passport, and Voter ID fields. Supports quality checks, face presence checks, and cropped image output.
+#### Collections (6)
 
-- **Human URL:** [https://documentation.hyperverge.co/](https://documentation.hyperverge.co/)
-- **Base URL:** `https://ind-docs.hyperverge.co/v2.0`
+Postman and Open Collection request collections.
 
-#### Tags
+- [HyperVerge Identity Verification API](https://apis.io/collections/hyperverge/open-hyperverge/)
+- [HyperVerge Identity Verification Database Verification API](https://apis.io/collections/hyperverge/open-hyperverge-database-verification-api/)
+- [HyperVerge Identity Verification Database Verification Face Match API](https://apis.io/collections/hyperverge/open-hyperverge-face-match-api/)
+- [HyperVerge Identity Verification Database Verification Input Validation API](https://apis.io/collections/hyperverge/open-hyperverge-input-validation-api/)
+- [HyperVerge Identity Verification Database Verification KYC OCR API](https://apis.io/collections/hyperverge/open-hyperverge-kyc-ocr-api/)
+- [HyperVerge Identity Verification Database Verification Matching API](https://apis.io/collections/hyperverge/open-hyperverge-matching-api/)
 
-- KYC
-- OCR
-- Document Verification
-- India
+#### Security (2)
 
-#### Properties
+Authentication, trust centre, and vulnerability disclosure.
 
-- [Documentation](https://github.com/hyperverge/kyc-india-rest-api)
-- [API Reference](https://github.com/hyperverge/kyc-india-rest-api/blob/master/README.md)
-- [OpenAPI](openapi/hyperverge-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/hyperverge.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/hyperverge.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Hyperverge Authentication](https://apis.io/security/hyperverge/hyperverge-authentication/)
+- [Hyperverge Domain Security](https://apis.io/security/hyperverge/hyperverge-domain-security/)
 
-### HyperVerge Database Verification API
+#### Plans and pricing (1)
 
-Central-database (government source) verification for Indian documents — verify a PAN with name and date of birth, fetch the registered name from a PAN, validate a Driving License, check a Voter ID (EPIC), and verify bank account details via IFSC and account number.
+Published plans, tiers and prices.
 
-- **Human URL:** [https://documentation.hyperverge.co/](https://documentation.hyperverge.co/)
-- **Base URL:** `https://ind-verify.hyperverge.co`
+- [Hyperverge Plans Pricing](https://apis.io/plans/hyperverge/hyperverge-plans-pricing/)
 
-#### Tags
+#### Rate limits (1)
 
-- Database Verification
-- PAN
-- Driving License
-- Voter ID
-- AML
+Published request limits.
 
-#### Properties
+- [Hyperverge Rate Limits](https://apis.io/rate-limits/hyperverge/hyperverge-rate-limits/)
 
-- [Documentation](https://github.com/hyperverge/db-verification-india-rest-api)
-- [API Reference](https://github.com/hyperverge/db-verification-india-rest-api/blob/master/README.md)
-- [OpenAPI](openapi/hyperverge-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/hyperverge.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/hyperverge.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### FinOps (1)
 
-### HyperVerge Input Validation API
+What the API costs to run, by operation.
 
-Cross-validates user-entered identity details against OCR (or QR) output for PAN, Aadhaar, Passport, and Voter ID during onboarding, returning per-field match results.
+- [Hyperverge Finops](https://apis.io/finops/hyperverge/hyperverge-finops/)
 
-- **Human URL:** [https://documentation.hyperverge.co/](https://documentation.hyperverge.co/)
-- **Base URL:** `https://ind-verify.hyperverge.co`
+## Where to find this API
 
-#### Tags
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- Validation
-- KYC
-- Onboarding
-- India
-
-#### Properties
-
-- [Documentation](https://github.com/hyperverge/validation-india-rest-api)
-- [API Reference](https://github.com/hyperverge/validation-india-rest-api/blob/master/README.md)
-- [OpenAPI](openapi/hyperverge-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/hyperverge.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/hyperverge.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### HyperVerge Matching API
-
-Compares two values across supported identity fields via `matchFields` — fuzzy matching for name and address, direct matching for fields such as DOB, PAN, Aadhaar, Passport, Voter ID, phone, and gender — returning per-field and overall match flags.
-
-- **Human URL:** [https://documentation.hyperverge.co/](https://documentation.hyperverge.co/)
-- **Base URL:** `https://ind-verify.hyperverge.co`
-
-#### Tags
-
-- Matching
-- Fuzzy Match
-- Onboarding
-
-#### Properties
-
-- [Documentation](https://github.com/hyperverge/matching-india-rest-api)
-- [API Reference](https://github.com/hyperverge/matching-india-rest-api/blob/master/README.md)
-- [OpenAPI](openapi/hyperverge-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/hyperverge.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/hyperverge.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### HyperVerge Face Match API
-
-Determines whether two face images belong to the same person via `POST /v1/photo/verifyPair` — selfie-to-ID or selfie-to-selfie — returning a match score. APAC region is served at `apac.faceid.hyperverge.co`.
-
-- **Human URL:** [https://documentation.hyperverge.co/](https://documentation.hyperverge.co/)
-- **Base URL:** `https://ind-faceid.hyperverge.co`
-
-#### Tags
-
-- Face Authentication
-- Face Match
-- Biometrics
-
-#### Properties
-
-- [Documentation](https://github.com/hyperverge/face-match-india-rest-api)
-- [API Reference](https://github.com/hyperverge/face-match-india-rest-api/blob/master/README.md)
-- [OpenAPI](openapi/hyperverge-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/hyperverge.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/hyperverge.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### HyperVerge Liveness Detection
-
-Passive liveness / presentation-attack detection from a single selfie, trained on 850M+ liveness checks. Delivered primarily through HyperVerge's mobile SDKs and the hosted onboarding Workflow. A standalone documented public REST endpoint for liveness was **not confirmed** in HyperVerge's published REST-API repositories at review time, so no OpenAPI operation is asserted for it — it is listed here as a documentation link only.
-
-- **Human URL:** [https://hyperverge.co/in/integrations-marketplace/facial-recognition-api/](https://hyperverge.co/in/integrations-marketplace/facial-recognition-api/)
-- **Base URL:** `https://ind-faceid.hyperverge.co`
-
-#### Tags
-
-- Liveness
-- Face Authentication
-- Fraud Prevention
-
-#### Properties
-
-- [Documentation](https://hyperverge.co/in/integrations-marketplace/facial-recognition-api/)
-
-## Common Properties
-
-- [Domain Security](security/hyperverge-domain-security.yml)
-- [Authentication](authentication/hyperverge-authentication.yml)
-- [GitHub Organization](https://github.com/hyperverge)
-- [LinkedIn](https://www.linkedin.com/company/hyperverge)
 - [Website](https://hyperverge.co)
 - [Documentation](https://documentation.hyperverge.co/)
-- [Plans](plans/hyperverge-plans-pricing.yml)
-- [Rate Limits](rate-limits/hyperverge-rate-limits.yml)
-- [Fin Ops](finops/hyperverge-finops.yml)
+- [Pricing](https://hyperverge.co/pricing/)
+- [Blog](https://hyperverge.co/news/)
+- [GitHub](https://github.com/hyperverge)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 33.5** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 51.2 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 32.1 |
+| Access clarity | 42.1 |
+
+**Agent readiness 20.4** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.5** — AI & Biometrics
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/hyperverge/](https://apis.io/providers/hyperverge/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for HyperVerge: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/hyperverge/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
